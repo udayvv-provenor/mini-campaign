@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Mini Campaign Blueprint — Template (6-Week · ~50 Target Accounts)</title>
+<title>Mini Campaign Blueprint — Template (8-Week · ~50 Target Accounts)</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='%231F3A68' d='M32 4 L56 12 V32 C56 48 44 56 32 60 C20 56 8 48 8 32 V12 Z'/%3E%3Cpath fill='none' stroke='%23FFFFFF' stroke-width='5' stroke-linecap='round' stroke-linejoin='round' d='M20 32 L29 41 L46 22'/%3E%3C/svg%3E" />
 <style>
   :root {
@@ -46,7 +46,7 @@
   header.site .eyebrow { font-size: 11px; letter-spacing: 1.8px; opacity: 0.85; text-transform: uppercase; }
   header.site h1 { margin: 4px 0 2px; font-size: 22px; font-weight: 700; }
   header.site .sub { font-size: 12.5px; opacity: 0.85; }
-
+ 
   .kpi-strip {
     display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px;
     background: var(--border); border-bottom: 1px solid var(--border);
@@ -55,7 +55,7 @@
   .kpi .lbl { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
   .kpi .val { font-size: 22px; font-weight: 700; color: var(--navy); }
   .kpi .v2 { font-size: 11px; color: var(--muted); }
-
+ 
   nav.tabs {
     display: flex; background: var(--card); border-bottom: 1px solid var(--border);
     overflow-x: auto;
@@ -67,11 +67,11 @@
   }
   nav.tabs button.active { color: var(--navy); border-bottom-color: var(--navy); font-weight: 600; }
   nav.tabs button:hover { color: var(--navy); }
-
+ 
   main { padding: 24px 28px 48px; max-width: 1400px; margin: 0 auto; }
   .panel { display: none; }
   .panel.active { display: block; }
-
+ 
   .card {
     background: var(--card); border: 1px solid var(--border); border-radius: 8px;
     padding: 20px; box-shadow: 0 1px 2px rgba(0,0,0,0.03);
@@ -79,12 +79,12 @@
   .card h2 { color: var(--navy); font-size: 16px; margin: 0 0 12px; letter-spacing: 0.2px; }
   .card h3 { color: var(--navy); font-size: 13px; margin: 0 0 8px; text-transform: uppercase; letter-spacing: 0.8px; }
   .card p.lead { font-size: 12.5px; color: var(--muted); margin: 0 0 10px; }
-
+ 
   .row { display: grid; gap: 16px; }
   .row.g2 { grid-template-columns: 1fr 1fr; }
   .row.g3 { grid-template-columns: 1fr 1fr 1fr; }
   .row.g4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
-
+ 
   /* ----- Placeholder ----- */
   .placeholder {
     background: var(--ph-bg);
@@ -109,7 +109,7 @@
   .placeholder .ph-sub { font-size: 11px; color: var(--muted); }
   .placeholder.tall { min-height: 130px; }
   .placeholder.short { min-height: 60px; }
-
+ 
   /* ----- Scope boxes ----- */
   .scope-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .scope-box { padding: 14px 16px; border-radius: 6px; border: 1px solid var(--border); }
@@ -120,9 +120,9 @@
   .scope-box.out .hd { color: var(--red); }
   .scope-box ul { margin: 0; padding-left: 18px; font-size: 12.5px; }
   .scope-box li { margin-bottom: 4px; }
-
+ 
   /* ----- Timeline ----- */
-  .timeline { display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; }
+  .timeline { display: grid; grid-template-columns: repeat(8, 1fr); gap: 4px; }
   .tl-week {
     background: var(--light-grey); padding: 10px 8px; border-radius: 4px; font-size: 11.5px;
     min-height: 74px;
@@ -131,7 +131,7 @@
   .tl-week.hinge2 { background: #D6EDD4; border: 1px solid var(--green); }
   .tl-week .wk { font-weight: 700; color: var(--navy); font-size: 11px; }
   .tl-week .wk-tag { font-size: 9.5px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
-
+ 
   /* ----- Chips ----- */
   .chip {
     font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 3px;
@@ -148,7 +148,7 @@
   .chip.tele { background: #FFF3E0; color: #E65100; }
   .chip.hi   { background: #D6EDD4; color: var(--green); }
   .chip.nu   { background: #FFF6D6; color: var(--amber); }
-
+ 
   /* ----- Inventory (TOFU/MOFU/BOFU) ----- */
   .inv-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
   .inv-col { padding: 12px; border-radius: 6px; border: 1px solid var(--border); }
@@ -174,7 +174,7 @@
     margin-right: 5px; text-transform: uppercase;
   }
   .inv-item .inv-p { font-size: 11px; color: var(--muted); margin-top: 2px; }
-
+ 
   /* ----- Asset gallery cards ----- */
   .cg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
   .cg-card {
@@ -184,7 +184,7 @@
   .cg-card .cg-hd { display: flex; gap: 6px; align-items: center; margin-bottom: 8px; flex-wrap: wrap; }
   .cg-card .cg-title { font-size: 13px; color: var(--navy); font-weight: 700; margin: 0 0 4px; }
   .cg-card .cg-gist { font-size: 11.5px; color: var(--muted); margin: 0 0 10px; min-height: 32px; }
-
+ 
   .group-hd {
     font-size: 12px; color: var(--navy); font-weight: 700;
     text-transform: uppercase; letter-spacing: 1px;
@@ -199,7 +199,7 @@
     font-size: 11px; color: var(--muted); font-weight: 500; text-transform: none;
     letter-spacing: 0; margin-left: auto;
   }
-
+ 
   /* ----- Flow diagram ----- */
   .flow-canvas {
     position: relative;
@@ -260,7 +260,7 @@
     text-align: center; font-size: 10px; color: var(--muted); margin: 4px 0;
     font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
   }
-
+ 
   /* ----- Intent tracks ----- */
   .tr-toggle { display: flex; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; align-items: center; }
   .tr-toggle button {
@@ -268,7 +268,7 @@
     border-radius: 5px; font-size: 12px; cursor: pointer;
   }
   .tr-toggle button.active { background: var(--navy); color: #fff; border-color: var(--navy); }
-
+ 
   .tr-grid { display: grid; grid-template-columns: 90px repeat(2, 1fr); gap: 6px; }
   .tr-col-hd {
     padding: 10px; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.8px;
@@ -290,7 +290,7 @@
   .tr-cell .tr-channels {
     margin-top: 5px; font-size: 10px; color: var(--navy); font-weight: 600;
   }
-
+ 
   /* ----- Channel / ISR plays ----- */
   .play-card {
     background: var(--card); border: 1px solid var(--border); border-radius: 6px;
@@ -301,7 +301,7 @@
     display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; font-size: 11px; color: var(--muted);
   }
   .play-card .pc-meta b { color: var(--navy); font-weight: 600; }
-
+ 
   .ch-tabs { display: flex; gap: 4px; margin-bottom: 16px; flex-wrap: wrap; }
   .ch-tabs button {
     background: var(--card); border: 1px solid var(--border); padding: 8px 14px;
@@ -312,7 +312,7 @@
   }
   .ch-panel { display: none; }
   .ch-panel.active { display: block; }
-
+ 
   /* ----- ISR / Tele ----- */
   .tele-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
   .tele-card {
@@ -336,7 +336,7 @@
     font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center;
   }
   .tele-card .tele-b { color: var(--navy); font-weight: 600; }
-
+ 
   /* ----- Classification summary ----- */
   .cls-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
   .cls-card {
@@ -358,7 +358,7 @@
   }
   .cls-card ul { margin: 6px 0 0; padding-left: 18px; font-size: 12px; }
   .cls-card li { margin-bottom: 4px; }
-
+ 
   /* ----- Predict ----- */
   .predict-grid { display: grid; grid-template-columns: 2fr 3fr; gap: 18px; }
   .sliders .slider-row {
@@ -369,7 +369,7 @@
   .sliders .slider-row .hint { font-size: 11px; color: var(--muted); }
   .sliders input[type="range"] { width: 100%; }
   .sliders .val { text-align: right; font-weight: 700; color: var(--navy); font-variant-numeric: tabular-nums; }
-
+ 
   .pred-funnel .pred-stage {
     display: grid; grid-template-columns: 200px 1fr 80px; gap: 10px; align-items: center;
     padding: 6px 0; font-size: 12px;
@@ -380,7 +380,7 @@
   .pred-bar.hi .bf { background: var(--green); }
   .pred-bar.nu .bf { background: var(--amber); }
   .pred-funnel .pv { text-align: right; font-weight: 700; color: var(--navy); font-variant-numeric: tabular-nums; }
-
+ 
   .summary-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 18px; }
   .sk-card {
     background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 14px;
@@ -390,15 +390,15 @@
   .sk-card .sk-v { font-size: 26px; font-weight: 700; color: var(--navy); font-variant-numeric: tabular-nums; }
   .sk-card.green .sk-v { color: var(--green); }
   .sk-card.amber .sk-v { color: var(--amber); }
-
+ 
   footer { padding: 16px 28px; text-align: center; font-size: 11px; color: var(--muted); }
-
+ 
   .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 11px; color: var(--muted); margin-top: 10px; }
   .legend .sw {
     display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 4px;
     vertical-align: middle;
   }
-
+ 
   /* ====== RESPONSIVE ====== */
   @media (max-width: 1100px) {
     main { padding: 20px 20px 36px; }
@@ -411,7 +411,7 @@
     .pred-funnel .pred-stage { grid-template-columns: 160px 1fr 70px; }
     .summary-kpis { grid-template-columns: repeat(2, 1fr); }
   }
-
+ 
   @media (max-width: 820px) {
     .timeline { grid-template-columns: repeat(3, 1fr); }
     .tele-wrap { grid-template-columns: 1fr; }
@@ -422,7 +422,7 @@
     .tr-grid .tr-col-hd { padding: 8px 4px; font-size: 10.5px; }
     .tr-grid .tr-row-hd { padding: 8px 4px; font-size: 10.5px; }
   }
-
+ 
   @media (max-width: 620px) {
     header.site { padding: 16px 16px; }
     header.site h1 { font-size: 17px; line-height: 1.25; }
@@ -469,7 +469,7 @@
     .tr-toggle { gap: 6px; }
     .tr-toggle button { padding: 5px 10px; font-size: 11.5px; }
   }
-
+ 
   @media (max-width: 420px) {
     .kpi-strip { grid-template-columns: 1fr 1fr; }
     header.site h1 { font-size: 15.5px; }
@@ -480,21 +480,21 @@
 </style>
 </head>
 <body>
-
+ 
 <header class="site">
   <div class="eyebrow">Mini Campaign Blueprint · Template</div>
-  <h1>6-Week Mini Campaign — High-Intent &amp; Nurture Tracks</h1>
-  <div class="sub">Offering-agnostic framework · ~50 Target Accounts · Webinar (W3) + Diagnostic Workshop (W5) hinge · For VP approval</div>
+  <h1>8-Week Mini Campaign — High-Intent &amp; Nurture Tracks</h1>
+  <div class="sub">Offering-agnostic framework · ~50 Target Accounts · Webinar (W4) + Diagnostic Workshop (W7) hinge · For VP approval</div>
 </header>
-
+ 
 <div class="kpi-strip">
   <div class="kpi"><div class="lbl">Target Accounts</div><div class="val">~50</div><div class="v2">TAL + prospects</div></div>
-  <div class="kpi"><div class="lbl">Duration</div><div class="val">6 wk</div><div class="v2">Webinar W3 · Workshop W5</div></div>
+  <div class="kpi"><div class="lbl">Duration</div><div class="val">8 wk</div><div class="v2">Webinar W4 · Workshop W7</div></div>
   <div class="kpi"><div class="lbl">Asset Bundle</div><div class="val">18</div><div class="v2">Collateral · Sales · Web · Promo</div></div>
   <div class="kpi"><div class="lbl">Hinge Points</div><div class="val">2</div><div class="v2">Webinar · Diagnostic Workshop</div></div>
   <div class="kpi"><div class="lbl">Output Tracks</div><div class="val">2</div><div class="v2">High-Intent · Nurture</div></div>
 </div>
-
+ 
 <nav class="tabs" id="tabnav">
   <button class="active" data-tab="overview">Overview</button>
   <button data-tab="flow">Campaign Flow</button>
@@ -503,9 +503,9 @@
   <button data-tab="tele">Tele / ISR Plays</button>
   <button data-tab="predict">Predict</button>
 </nav>
-
+ 
 <main>
-
+ 
 <!-- ============ OVERVIEW ============ -->
 <div class="panel active" id="overview">
   <div class="card" style="margin-bottom:18px;">
@@ -516,7 +516,7 @@
         <ul>
           <li>Mini campaign for one offering · offering-agnostic template</li>
           <li>~50 target accounts (TAL + direct prospects)</li>
-          <li>6-week hard stop — Webinar W3, Workshop W5, Classification W6</li>
+          <li>8-week cycle — Webinar W4, Workshop W7, Classification W8</li>
           <li>Channels: Email · LinkedIn (Organic + Paid) · Website · Tele/ISR</li>
           <li>Webinar (with demo, where applicable) + Diagnostic Workshop as hinges</li>
           <li>Classify outputs at end into <b>High-Intent</b> (attended workshop) or <b>Nurture</b> (registered, did not attend)</li>
@@ -530,12 +530,12 @@
           <li>Industry-specific tailoring (template is generic)</li>
           <li>Multi-offering bundling</li>
           <li>Post-workshop delivery (Pursuit handoff lives with the AE)</li>
-          <li>Anything beyond the 6-week window</li>
+          <li>Anything beyond the 8-week window</li>
         </ul>
       </div>
     </div>
   </div>
-
+ 
   <div class="card" style="margin-bottom:18px;">
     <h2>Asset Bundle — by Category and Funnel Stage</h2>
     <p class="lead">Four production families feed the campaign. Funnel stage chip (TOFU / MOFU / BOFU) appears on every item in the Asset Inventory tab.</p>
@@ -565,33 +565,35 @@
       </div>
     </div>
   </div>
-
+ 
   <div class="card">
-    <h2>6-Week Timeline</h2>
+    <h2>8-Week Timeline</h2>
     <div class="timeline">
       <div class="tl-week"><div class="wk">W1</div><div class="wk-tag">Set-up</div>TAL + prospects finalized · LPs + tracking live · asset audit · tele briefed</div>
-      <div class="tl-week"><div class="wk">W2</div><div class="wk-tag">Outreach</div>Core assets drop · email sequence · LI organic + paid start · tele 1st pass</div>
-      <div class="tl-week"><div class="wk">W3</div><div class="wk-tag">Webinar Hinge</div><b>Webinar LIVE</b> · demo where applicable · attendees routed + success stories delivered</div>
-      <div class="tl-week"><div class="wk">W4</div><div class="wk-tag">Proof</div>Post-event segmentation · CL4-CL6 sent to attendees · workshop invite push · tele 2nd pass</div>
-      <div class="tl-week hinge"><div class="wk">W5</div><div class="wk-tag">Workshop</div><b>Diagnostic Workshops</b> held · SE decks + battle cards in play · no-show recovery loop</div>
-      <div class="tl-week hinge2"><div class="wk">W6</div><div class="wk-tag">Classify</div><b>Classify</b> · High-Intent → Pursuit handoff to AE · Nurture → drip re-entry</div>
+      <div class="tl-week"><div class="wk">W2</div><div class="wk-tag">Outreach</div>Core assets drop (CL1/CL2) · email T1 · LI organic + paid start · SE5 signal watch</div>
+      <div class="tl-week"><div class="wk">W3</div><div class="wk-tag">Webinar Recruit</div>WD2/WD3 live · CL3 snippet · tele 1st pass · personalized invites to Tier-1</div>
+      <div class="tl-week hinge"><div class="wk">W4</div><div class="wk-tag">Webinar Hinge</div><b>Webinar LIVE</b> · demo where applicable · post-event segmentation same night</div>
+      <div class="tl-week"><div class="wk">W5</div><div class="wk-tag">Proof</div>CL4-CL6 delivered to attendees · replay drip to no-shows · workshop teaser</div>
+      <div class="tl-week"><div class="wk">W6</div><div class="wk-tag">Workshop Recruit</div>WD4/WD5 live · TE2 dials · pre-work questionnaire sent · AE+SA alignment</div>
+      <div class="tl-week hinge"><div class="wk">W7</div><div class="wk-tag">Workshop Hinge</div><b>Diagnostic Workshops</b> held · SE decks + battle cards in play · no-show recovery loop</div>
+      <div class="tl-week hinge2"><div class="wk">W8</div><div class="wk-tag">Classify</div><b>Classify</b> · High-Intent → Pursuit handoff to AE · Nurture → drip re-entry</div>
     </div>
     <div class="legend">
-      <span><span class="sw" style="background:#D7E7FB;border:1px solid var(--blue);"></span>Webinar hinge (W3)</span>
-      <span><span class="sw" style="background:#D6EDD4;border:1px solid var(--green);"></span>Classification (W6)</span>
+      <span><span class="sw" style="background:#D7E7FB;border:1px solid var(--blue);"></span>Hinge — Webinar (W4) &amp; Workshop (W7)</span>
+      <span><span class="sw" style="background:#D6EDD4;border:1px solid var(--green);"></span>Classification (W8)</span>
       <span><span class="sw" style="background:var(--light-grey);"></span>Standard week</span>
     </div>
   </div>
 </div>
-
+ 
 <!-- ============ FLOW ============ -->
 <div class="panel" id="flow">
   <div class="card" style="margin-bottom:14px;">
     <h2>End-to-End Campaign Flow</h2>
     <p class="lead">Single-lane view of the campaign from list to classification. Branches occur at two points: after webinar registration (attend / no-show), and after workshop registration (attend / no-show). The second branch produces the two output tracks.</p>
-
+ 
     <div class="flow-canvas">
-
+ 
       <div class="flow-row r1">
         <div class="flow-node start">
           <div class="fn-t">1 · Target Account List + Prospects</div>
@@ -600,7 +602,7 @@
         </div>
       </div>
       <div class="flow-arrow">↓</div>
-
+ 
       <div class="flow-row r3">
         <div class="flow-node">
           <div class="fn-t">2a · Email outreach</div>
@@ -619,7 +621,7 @@
         </div>
       </div>
       <div class="flow-arrow">↓</div>
-
+ 
       <div class="flow-row r1">
         <div class="flow-node">
           <div class="fn-t">3 · Core assets + CTA → Interest captured</div>
@@ -628,7 +630,7 @@
         </div>
       </div>
       <div class="flow-arrow">↓</div>
-
+ 
       <div class="flow-row r1">
         <div class="flow-node">
           <div class="fn-t">4 · More core assets → Webinar invitation</div>
@@ -637,15 +639,15 @@
         </div>
       </div>
       <div class="flow-arrow">↓</div>
-
+ 
       <div class="flow-row r1">
         <div class="flow-node hinge">
-          <div class="fn-t">5 · WEBINAR — Hinge 1 (Week 3)</div>
+          <div class="fn-t">5 · WEBINAR — Hinge 1 (Week 4)</div>
           <div class="fn-d">Live session with demo where applicable. Dual narrative: business + technical. Q&amp;A surface hand-raisers.</div>
           <div class="fn-a">WD3 LP · SE1 + SE2 themes · demo assets</div>
         </div>
       </div>
-
+ 
       <div class="flow-merge">Post-webinar branch</div>
       <div class="flow-branch-row">
         <div class="flow-branch-label l">Attended</div>
@@ -662,7 +664,7 @@
         </div>
       </div>
       <div class="flow-arrow">↓</div>
-
+ 
       <div class="flow-row r1">
         <div class="flow-node">
           <div class="fn-t">7 · Workshop invitation + tele recruitment</div>
@@ -671,15 +673,15 @@
         </div>
       </div>
       <div class="flow-arrow">↓</div>
-
+ 
       <div class="flow-row r1">
         <div class="flow-node hinge2">
-          <div class="fn-t">8 · DIAGNOSTIC WORKSHOP — Hinge 2 (Week 5)</div>
+          <div class="fn-t">8 · DIAGNOSTIC WORKSHOP — Hinge 2 (Week 7)</div>
           <div class="fn-d">1:1 facilitated session. Output: scorecard + remediation roadmap. SE decks + SE4 objection guide support the room.</div>
           <div class="fn-a">WD4 facilitation · SE1/SE2 · SE3 · SE4</div>
         </div>
       </div>
-
+ 
       <div class="flow-merge">Workshop branch — the classification hinge</div>
       <div class="flow-branch-row">
         <div class="flow-branch-label l">Attended</div>
@@ -695,11 +697,11 @@
           <div class="fn-a">Output: Nurture list · drip sequence · signal watch</div>
         </div>
       </div>
-
+ 
     </div>
   </div>
 </div>
-
+ 
 <!-- ============ ASSET INVENTORY ============ -->
 <div class="panel" id="assets">
   <div class="card" style="margin-bottom:14px;">
@@ -712,27 +714,27 @@
       <button data-afilter="bofu">BOFU</button>
     </div>
   </div>
-
+ 
   <div class="card">
     <div class="group-hd">Collaterals <span class="count">6</span> <span class="desc">Core offering + proof assets</span></div>
     <div class="cg-grid" id="gridCollaterals"></div>
-
+ 
     <div class="group-hd">Sales Enablement <span class="count">5</span> <span class="desc">Seller-facing kit — decks, battle cards, pitch guide, ready reckoner</span></div>
     <div class="cg-grid" id="gridSales"></div>
-
+ 
     <div class="group-hd">Web Documents <span class="count">5</span> <span class="desc">Landing pages + webinar/workshop outlines for TA recruitment</span></div>
     <div class="cg-grid" id="gridWeb"></div>
-
+ 
     <div class="group-hd">Promotional — Campaign Design <span class="count">Channel sets</span> <span class="desc">Email · LinkedIn (Organic + Paid) · Website</span></div>
     <div class="cg-grid" id="gridPromo"></div>
   </div>
 </div>
-
+ 
 <!-- ============ INTENT TRACKS ============ -->
 <div class="panel" id="tracks">
   <div class="card" style="margin-bottom:14px;">
     <h2>Intent Tracks — High-Intent vs Nurture Plays</h2>
-    <p class="lead">Same campaign stages, two expressions. An account's track is not fixed until the workshop branch at W5 — until then, <b>any account can shift tracks</b> based on signal. Classification is only locked at W6.</p>
+    <p class="lead">Same campaign stages, two expressions. An account's track is not fixed until the workshop branch at W7 — until then, <b>any account can shift tracks</b> based on signal. Classification is only locked at W8.</p>
     <div class="cls-grid" style="margin-bottom: 14px;">
       <div class="cls-card hi">
         <h3>High-Intent · the Pursuit list</h3>
@@ -755,12 +757,12 @@
         </ul>
       </div>
     </div>
-
+ 
     <div class="tr-grid">
       <div></div>
       <div class="tr-col-hd hi">High-Intent Play</div>
       <div class="tr-col-hd nu">Nurture Play</div>
-
+ 
       <div class="tr-row-hd">S1<br>Outreach</div>
       <div class="tr-cell hi"><span class="t">Named-sender exec ping</span>CP/AE-signed email + LI DM referencing account-specific signal. Tele 1st-pass same week.
         <div class="tr-channels">Channels: Email · LI org/paid · Tele</div>
@@ -770,7 +772,7 @@
         <div class="tr-channels">Channels: Email · LI paid · Website</div>
         <div class="tr-assets">Assets: CL1, CL2, WD1</div>
       </div>
-
+ 
       <div class="tr-row-hd">S2<br>Interest</div>
       <div class="tr-cell hi"><span class="t">1:1 enrichment call</span>SDR qualification call + deep-dive on CL2 brochure. Ready Reckoner flags promoted.
         <div class="tr-channels">Channels: Tele · Email</div>
@@ -780,7 +782,7 @@
         <div class="tr-channels">Channels: Website · LI paid</div>
         <div class="tr-assets">Assets: WD1, CL1</div>
       </div>
-
+ 
       <div class="tr-row-hd">S3<br>Webinar</div>
       <div class="tr-cell hi"><span class="t">Personal webinar invite + seat hold</span>Named invite + tele confirmation. Pre-event prep note from AE.
         <div class="tr-channels">Channels: Email · Tele</div>
@@ -790,7 +792,7 @@
         <div class="tr-channels">Channels: Web · LI paid · Email</div>
         <div class="tr-assets">Assets: WD3, CL3</div>
       </div>
-
+ 
       <div class="tr-row-hd">S4<br>Post-Webinar</div>
       <div class="tr-cell hi"><span class="t">Success stories + workshop push</span>CL4-CL6 hand-delivered. Tele within 24h to book workshop.
         <div class="tr-channels">Channels: Email · Tele</div>
@@ -800,7 +802,7 @@
         <div class="tr-channels">Channels: Email · LI org</div>
         <div class="tr-assets">Assets: Replay, CL3</div>
       </div>
-
+ 
       <div class="tr-row-hd">S5<br>Workshop</div>
       <div class="tr-cell hi"><span class="t">Diagnostic workshop delivered</span>1:1 session. Scorecard + roadmap produced. SE decks / SE3 / SE4 in the room.
         <div class="tr-channels">Channels: Workshop · Email</div>
@@ -810,7 +812,7 @@
         <div class="tr-channels">Channels: Tele · Email</div>
         <div class="tr-assets">Assets: TE2 script, WD5</div>
       </div>
-
+ 
       <div class="tr-row-hd">S6<br>Classify</div>
       <div class="tr-cell hi" style="background:linear-gradient(135deg,#D6EDD4,#B7E0B3);border-color:var(--green);">
         <span class="t" style="color:var(--green);">HIGH-INTENT · Pursuit handoff</span>
@@ -827,37 +829,37 @@
     </div>
   </div>
 </div>
-
+ 
 <!-- ============ TELE / ISR ============ -->
 <div class="panel" id="tele">
   <div class="card" style="margin-bottom:14px;">
     <h2>Tele / ISR Plays</h2>
-    <p class="lead">The ISR / tele-calling team runs two dedicated recruitment motions: webinar (W2-W3) and workshop (W4-W5). Scripts anchor to SE5 Ready Reckoner (signals + responses) and hand off to AE+SA for High-Intent outcomes.</p>
-
+    <p class="lead">The ISR / tele-calling team runs two dedicated recruitment motions: webinar (W2-W4) and workshop (W5-W7). Scripts anchor to SE5 Ready Reckoner (signals + responses) and hand off to AE+SA for High-Intent outcomes.</p>
+ 
     <div class="tele-wrap">
       <div class="tele-card webinar">
         <h3>TE1 · Webinar Recruitment</h3>
-        <div class="tele-sub">Timing: W2 (first-pass warm) · W3 (confirm seats) · Scripts aligned to Business or Technical stakeholder</div>
+        <div class="tele-sub">Timing: W2-W3 (first-pass warm) · W4 (confirm seats, day-of reminder) · Scripts aligned to Business or Technical stakeholder</div>
         <div class="tele-step"><div class="tele-num">1</div><div><span class="tele-b">Open.</span> Reference account-specific signal from SE5 Ready Reckoner. Tie to 1-2 sentence offering hook (CL1).</div></div>
         <div class="tele-step"><div class="tele-num">2</div><div><span class="tele-b">Qualify.</span> Current-state question → confirm role fit (biz vs tech). 30-60s discovery max.</div></div>
-        <div class="tele-step"><div class="tele-num">3</div><div><span class="tele-b">Pitch webinar.</span> Position the W3 session as the shortest path to see the offering + demo in context. Send WD3 LP during call.</div></div>
+        <div class="tele-step"><div class="tele-num">3</div><div><span class="tele-b">Pitch webinar.</span> Position the W4 session as the shortest path to see the offering + demo in context. Send WD3 LP during call.</div></div>
         <div class="tele-step"><div class="tele-num">4</div><div><span class="tele-b">Handle objection.</span> Pull from SE4 Pitch &amp; Objection Handling Guide — top 5 reusable answers.</div></div>
         <div class="tele-step"><div class="tele-num">5</div><div><span class="tele-b">Confirm.</span> Book seat. Send CL3 success story snippet as teaser. Log signal flags in CRM.</div></div>
         <div class="tele-step"><div class="tele-num">6</div><div><span class="tele-b">Day-of reminder.</span> Morning-of tele nudge to Tier-1 registrants. Auto-reminder email covers the rest.</div></div>
       </div>
-
+ 
       <div class="tele-card workshop">
         <h3>TE2 · Workshop Recruitment</h3>
-        <div class="tele-sub">Timing: W4 (attendees first) · W5 (recover no-shows) · Output feeds W6 classification</div>
+        <div class="tele-sub">Timing: W5-W6 (attendees first, then bookings ramp) · W7 (day-of + recover no-shows) · Output feeds W8 classification</div>
         <div class="tele-step"><div class="tele-num">1</div><div><span class="tele-b">Prioritize.</span> Attended webinar + tagged as Business/Technical champion = first dials. Registered-but-no-show second. Unknown signal third.</div></div>
         <div class="tele-step"><div class="tele-num">2</div><div><span class="tele-b">Position.</span> Diagnostic workshop as a "2-hour, scorecard-out" 1:1 session with SA. Anchor to WD4 outline.</div></div>
         <div class="tele-step"><div class="tele-num">3</div><div><span class="tele-b">Book.</span> Send WD5 booking LP during the call. Confirm pre-work questionnaire.</div></div>
         <div class="tele-step"><div class="tele-num">4</div><div><span class="tele-b">Handoff.</span> AE + SA notified on booking. Opportunity created at booking (not after workshop).</div></div>
         <div class="tele-step"><div class="tele-num">5</div><div><span class="tele-b">Recover no-show.</span> 24h post-miss call. Re-book within 10 bus days. If declined → flag Nurture.</div></div>
-        <div class="tele-step"><div class="tele-num">6</div><div><span class="tele-b">Classify.</span> At W6, feed final disposition (attended / no-show / declined) into reporting for High-Intent vs Nurture labeling.</div></div>
+        <div class="tele-step"><div class="tele-num">6</div><div><span class="tele-b">Classify.</span> At W8, feed final disposition (attended / no-show / declined) into reporting for High-Intent vs Nurture labeling.</div></div>
       </div>
     </div>
-
+ 
     <div style="margin-top:16px;">
       <div class="card">
         <h3>Tele Capacity + Guardrails</h3>
@@ -867,7 +869,7 @@
             <div class="pc-meta">
               <span>Accounts:</span><span><b>~50</b></span>
               <span>Touches/account:</span><span><b>3-5</b></span>
-              <span>Effort:</span><span>~180 dials total over 6 wk</span>
+              <span>Effort:</span><span>~240 dials total over 8 wk</span>
               <span>Team:</span><span>1-2 ISRs shared</span>
             </div>
           </div>
@@ -894,51 +896,51 @@
     </div>
   </div>
 </div>
-
+ 
 <!-- ============ PREDICT ============ -->
 <div class="panel" id="predict">
   <div class="card">
     <h2>Live Funnel Predictor — Move the sliders</h2>
-    <p class="lead">The predictor models the 6-week mini campaign end-to-end. Defaults are mid-point assumptions for a ~50-account template. Outputs: workshops held, High-Intent count, Nurture count, and qualified pipeline (TCV).</p>
-
+    <p class="lead">The predictor models the 8-week mini campaign end-to-end. Defaults are mid-point assumptions for a ~50-account template. Outputs: workshops held, High-Intent count, Nurture count, and qualified pipeline (TCV).</p>
+ 
     <div class="predict-grid">
       <div class="sliders" id="sliders">
         <div class="slider-row"><div><div class="lbl">Target Accounts (total)</div><div class="hint">TAL + direct prospects, merged</div></div><div class="val" id="v-tal">50</div></div>
         <div><input type="range" id="s-tal" min="10" max="200" value="50" step="5"></div>
-
+ 
         <div class="slider-row"><div><div class="lbl">Outreach Engagement</div><div class="hint">Any asset view or CTA click</div></div><div class="val" id="v-eng">40%</div></div>
         <div><input type="range" id="s-eng" min="15" max="75" value="40" step="1"></div>
-
+ 
         <div class="slider-row"><div><div class="lbl">Webinar Registration</div><div class="hint">Of engaged accounts</div></div><div class="val" id="v-reg">45%</div></div>
         <div><input type="range" id="s-reg" min="20" max="80" value="45" step="1"></div>
-
+ 
         <div class="slider-row"><div><div class="lbl">Webinar Attendance</div><div class="hint">Of registrants (live + near-live)</div></div><div class="val" id="v-att">55%</div></div>
         <div><input type="range" id="s-att" min="25" max="85" value="55" step="1"></div>
-
+ 
         <div class="slider-row"><div><div class="lbl">Workshop Registration</div><div class="hint">Of webinar attendees + hand-raisers</div></div><div class="val" id="v-wreg">50%</div></div>
         <div><input type="range" id="s-wreg" min="20" max="90" value="50" step="1"></div>
-
+ 
         <div class="slider-row"><div><div class="lbl">Workshop Attendance</div><div class="hint">Of workshop registrants</div></div><div class="val" id="v-watt">70%</div></div>
         <div><input type="range" id="s-watt" min="30" max="95" value="70" step="1"></div>
-
+ 
         <div class="slider-row"><div><div class="lbl">Pursuit Conversion</div><div class="hint">Of workshop attendees → qualified pipeline</div></div><div class="val" id="v-pur">65%</div></div>
         <div><input type="range" id="s-pur" min="30" max="95" value="65" step="1"></div>
-
+ 
         <div class="slider-row"><div><div class="lbl">Avg Deal Size (TCV)</div><div class="hint">$50K min · $50K steps · default $500K</div></div><div class="val" id="v-val">$500K</div></div>
         <div><input type="range" id="s-val" min="50" max="2000" value="500" step="50"></div>
       </div>
-
+ 
       <div>
         <h3 style="margin-top:0;">Funnel</h3>
         <div class="pred-funnel" id="pred-funnel"></div>
-
+ 
         <div class="summary-kpis">
           <div class="sk-card"><div class="sk-l">Workshops Held</div><div class="sk-v" id="sum-ws">-</div></div>
           <div class="sk-card green"><div class="sk-l">High-Intent</div><div class="sk-v" id="sum-hi">-</div></div>
           <div class="sk-card amber"><div class="sk-l">Nurture</div><div class="sk-v" id="sum-nu">-</div></div>
           <div class="sk-card green"><div class="sk-l">Pipeline TCV</div><div class="sk-v" id="sum-val">-</div></div>
         </div>
-
+ 
         <div class="legend" style="margin-top:16px;">
           <span><span class="sw" style="background:var(--navy);"></span>Main funnel</span>
           <span><span class="sw" style="background:var(--green);"></span>High-Intent (attended workshop)</span>
@@ -948,13 +950,13 @@
     </div>
   </div>
 </div>
-
+ 
 </main>
-
+ 
 <footer>
-  Mini Campaign Blueprint · Template · 6 weeks · ~50 target accounts · Offering-agnostic · Single-file HTML for VP review
+  Mini Campaign Blueprint · Template · 8 weeks · ~50 target accounts · Offering-agnostic · Single-file HTML for VP review
 </footer>
-
+ 
 <script>
   // ---------- TABS ----------
   const tabBtns = document.querySelectorAll('#tabnav button');
@@ -965,7 +967,7 @@
     const t = b.dataset.tab;
     panels.forEach(p => p.classList.toggle('active', p.id === t));
   }));
-
+ 
   // ---------- ASSET INVENTORY ----------
   const assets = {
     collaterals: [
@@ -991,13 +993,13 @@
       { id:'WD5', funnel:'bofu', title:'Workshop LP (TA Recruitment)', sub:'Booking calendar + confirm', owner:'Web \u00b7 Marketing', format:'Single LP' },
     ],
     promo: [
-      { id:'PR1', funnel:'tofu', title:'Email Plays', sub:'Outreach T1-T3 \u00b7 nurture drip \u00b7 post-event recovery', owner:'Email Marketing', format:'~8 sends over 6 wk' },
-      { id:'PR2', funnel:'tofu', title:'LinkedIn Organic', sub:'Exec + company posts anchored to CL1/CL3', owner:'Social \u00b7 Practice Lead', format:'3/week for 6 wk' },
+      { id:'PR1', funnel:'tofu', title:'Email Plays', sub:'Outreach T1-T3 \u00b7 nurture drip \u00b7 post-event recovery', owner:'Email Marketing', format:'~10 sends over 8 wk' },
+      { id:'PR2', funnel:'tofu', title:'LinkedIn Organic', sub:'Exec + company posts anchored to CL1/CL3', owner:'Social \u00b7 Practice Lead', format:'3/week for 8 wk' },
       { id:'PR3', funnel:'tofu', title:'LinkedIn Paid (ABM matched)', sub:'Awareness \u2192 webinar \u2192 retargeting', owner:'Paid Media', format:'3-4 ads, rolling' },
       { id:'PR4', funnel:'tofu', title:'Website Promotions', sub:'Hero banner / modal / embed on WD1-WD5', owner:'Web Marketing', format:'Varies by page' },
     ],
   };
-
+ 
   function renderAssetCard(a, typeChip) {
     return `<div class="cg-card" data-f="${a.funnel}">
       <div class="cg-hd">
@@ -1016,12 +1018,12 @@
   function typeChipLabel(c){
     return { coll:'Collateral', sale:'Sales Enablement', web:'Web Doc', promo:'Promo', tele:'Tele/ISR' }[c] || c;
   }
-
+ 
   document.getElementById('gridCollaterals').innerHTML = assets.collaterals.map(a => renderAssetCard(a, 'coll')).join('');
   document.getElementById('gridSales').innerHTML       = assets.sales.map(a => renderAssetCard(a, 'sale')).join('');
   document.getElementById('gridWeb').innerHTML         = assets.web.map(a => renderAssetCard(a, 'web')).join('');
   document.getElementById('gridPromo').innerHTML       = assets.promo.map(a => renderAssetCard(a, 'promo')).join('');
-
+ 
   document.querySelectorAll('[data-afilter]').forEach(b => {
     b.addEventListener('click', () => {
       document.querySelectorAll('[data-afilter]').forEach(x => x.classList.remove('active'));
@@ -1032,7 +1034,7 @@
       });
     });
   });
-
+ 
   // ---------- PREDICT ----------
   const sl = id => document.getElementById(id);
   const fmt = n => Math.round(n).toLocaleString();
@@ -1045,7 +1047,7 @@
     const watt = +sl('s-watt').value / 100;
     const pur  = +sl('s-pur').value / 100;
     const val  = +sl('s-val').value;
-
+ 
     sl('v-tal').textContent  = fmt(tal);
     sl('v-eng').textContent  = (eng*100).toFixed(0) + '%';
     sl('v-reg').textContent  = (reg*100).toFixed(0) + '%';
@@ -1054,7 +1056,7 @@
     sl('v-watt').textContent = (watt*100).toFixed(0) + '%';
     sl('v-pur').textContent  = (pur*100).toFixed(0) + '%';
     sl('v-val').textContent  = '$' + val + 'K';
-
+ 
     const engd  = Math.round(tal * eng);
     const regs  = Math.round(engd * reg);
     const atts  = Math.round(regs * att);
@@ -1063,7 +1065,7 @@
     const nurt  = Math.max(wregs - watts, 0);       // Nurture (registered, no-show)
     const pipCnt = Math.round(watts * pur);
     const pipVal = pipCnt * val;
-
+ 
     const stages = [
       { n: 'Target Accounts',           v: tal,  w: 100,                cls: '' },
       { n: 'Engaged Accounts',          v: engd, w: (engd/tal)*100,     cls: '' },
@@ -1084,7 +1086,7 @@
         <div class="pv">${s.v}</div>`;
       fnl.appendChild(row);
     });
-
+ 
     sl('sum-ws').textContent = watts;         // workshops delivered (attended = High-Intent population)
     sl('sum-hi').textContent = watts;
     sl('sum-nu').textContent = nurt;
@@ -1098,6 +1100,7 @@
   });
   refresh();
 </script>
-
+ 
 </body>
 </html>
+ 

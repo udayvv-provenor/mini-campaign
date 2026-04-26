@@ -3,12 +3,13 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Mini Campaign Blueprint — Template (8-Week · ~50 Target Accounts)</title>
+<title>Campaign in a Box — Lean &amp; Rich Variants (Template)</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='%231F3A68' d='M32 4 L56 12 V32 C56 48 44 56 32 60 C20 56 8 48 8 32 V12 Z'/%3E%3Cpath fill='none' stroke='%23FFFFFF' stroke-width='5' stroke-linecap='round' stroke-linejoin='round' d='M20 32 L29 41 L46 22'/%3E%3C/svg%3E" />
 <style>
   :root {
     --navy: #1F3A68;
     --navy-2: #2F4F82;
+    --navy-dk: #0F2547;
     --green: #2E7D32;
     --amber: #A67C00;
     --red: #B23A3A;
@@ -41,12 +42,48 @@
   }
   header.site {
     background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%);
-    color: #fff; padding: 20px 28px; box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    color: #fff; padding: 18px 28px 14px; box-shadow: 0 2px 10px rgba(0,0,0,0.08);
   }
   header.site .eyebrow { font-size: 11px; letter-spacing: 1.8px; opacity: 0.85; text-transform: uppercase; }
   header.site h1 { margin: 4px 0 2px; font-size: 22px; font-weight: 700; }
   header.site .sub { font-size: 12.5px; opacity: 0.85; }
- 
+
+  /* ---- Variant toggle bar ---- */
+  .variant-bar {
+    background: var(--navy-dk);
+    padding: 10px 28px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .vt-label {
+    font-size: 10.5px; color: rgba(255,255,255,0.7); letter-spacing: 1.6px;
+    text-transform: uppercase; font-weight: 700; margin-right: 6px;
+  }
+  .vt-btn {
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.25);
+    color: #fff; padding: 7px 14px; border-radius: 5px; font-family: inherit;
+    cursor: pointer; display: flex; flex-direction: column; align-items: flex-start;
+    gap: 1px; min-width: 230px; text-align: left;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .vt-btn:hover { background: rgba(255,255,255,0.18); }
+  .vt-btn.active { background: #fff; color: var(--navy-dk); border-color: #fff; box-shadow: 0 1px 6px rgba(0,0,0,0.2); }
+  .vt-btn .vt-name { font-size: 13px; font-weight: 700; }
+  .vt-btn .vt-tag { font-size: 10.5px; opacity: 0.85; }
+  .vt-btn.active .vt-tag { opacity: 1; color: var(--muted); }
+
+  /* ---- Variant visibility ---- */
+  body[data-variant="lean"] .rich-only { display: none !important; }
+  body[data-variant="rich"] .lean-only { display: none !important; }
+
+  /* Inline span helpers */
+  .ln-only, .rh-only { display: inline; }
+  body[data-variant="lean"] .rh-only { display: none !important; }
+  body[data-variant="rich"] .ln-only { display: none !important; }
+
+  /* Block-level variant-scoped containers (grids, panels) */
+  body[data-variant="lean"] [data-variant-only="rich"] { display: none !important; }
+  body[data-variant="rich"] [data-variant-only="lean"] { display: none !important; }
+
   .kpi-strip {
     display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px;
     background: var(--border); border-bottom: 1px solid var(--border);
@@ -55,7 +92,7 @@
   .kpi .lbl { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
   .kpi .val { font-size: 22px; font-weight: 700; color: var(--navy); }
   .kpi .v2 { font-size: 11px; color: var(--muted); }
- 
+
   nav.tabs {
     display: flex; background: var(--card); border-bottom: 1px solid var(--border);
     overflow-x: auto;
@@ -67,11 +104,11 @@
   }
   nav.tabs button.active { color: var(--navy); border-bottom-color: var(--navy); font-weight: 600; }
   nav.tabs button:hover { color: var(--navy); }
- 
+
   main { padding: 24px 28px 48px; max-width: 1400px; margin: 0 auto; }
   .panel { display: none; }
   .panel.active { display: block; }
- 
+
   .card {
     background: var(--card); border: 1px solid var(--border); border-radius: 8px;
     padding: 20px; box-shadow: 0 1px 2px rgba(0,0,0,0.03);
@@ -79,13 +116,13 @@
   .card h2 { color: var(--navy); font-size: 16px; margin: 0 0 12px; letter-spacing: 0.2px; }
   .card h3 { color: var(--navy); font-size: 13px; margin: 0 0 8px; text-transform: uppercase; letter-spacing: 0.8px; }
   .card p.lead { font-size: 12.5px; color: var(--muted); margin: 0 0 10px; }
- 
+
   .row { display: grid; gap: 16px; }
   .row.g2 { grid-template-columns: 1fr 1fr; }
   .row.g3 { grid-template-columns: 1fr 1fr 1fr; }
   .row.g4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
- 
-  /* ----- Placeholder ----- */
+
+  /* ---- Placeholder (finished content preview) ---- */
   .placeholder {
     background: var(--ph-bg);
     border: 1.5px dashed var(--ph-border);
@@ -94,12 +131,9 @@
     text-align: center;
     color: var(--muted);
     font-size: 11px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 90px;
-    line-height: 1.5;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    min-height: 90px; line-height: 1.5;
   }
   .placeholder .ph-icon { font-size: 22px; color: var(--ph-border); margin-bottom: 4px; }
   .placeholder .ph-label {
@@ -108,9 +142,8 @@
   }
   .placeholder .ph-sub { font-size: 11px; color: var(--muted); }
   .placeholder.tall { min-height: 130px; }
-  .placeholder.short { min-height: 60px; }
- 
-  /* ----- Scope boxes ----- */
+
+  /* ---- Scope boxes ---- */
   .scope-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .scope-box { padding: 14px 16px; border-radius: 6px; border: 1px solid var(--border); }
   .scope-box.in  { background: #F1F7F0; border-color: #CFE5CD; }
@@ -120,19 +153,22 @@
   .scope-box.out .hd { color: var(--red); }
   .scope-box ul { margin: 0; padding-left: 18px; font-size: 12.5px; }
   .scope-box li { margin-bottom: 4px; }
- 
-  /* ----- Timeline ----- */
-  .timeline { display: grid; grid-template-columns: repeat(8, 1fr); gap: 4px; }
+
+  /* ---- Timeline ---- */
+  .timeline { display: grid; gap: 4px; }
+  .timeline.t8  { grid-template-columns: repeat(8, 1fr); }
+  .timeline.t12 { grid-template-columns: repeat(12, 1fr); }
   .tl-week {
     background: var(--light-grey); padding: 10px 8px; border-radius: 4px; font-size: 11.5px;
-    min-height: 74px;
+    min-height: 78px;
   }
+  .tl-week.tl-block  { background: var(--purple-shade); border: 1px solid #C4B7E0; }
   .tl-week.hinge { background: #D7E7FB; border: 1px solid var(--blue); }
   .tl-week.hinge2 { background: #D6EDD4; border: 1px solid var(--green); }
   .tl-week .wk { font-weight: 700; color: var(--navy); font-size: 11px; }
   .tl-week .wk-tag { font-size: 9.5px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
- 
-  /* ----- Chips ----- */
+
+  /* ---- Chips ---- */
   .chip {
     font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 3px;
     text-transform: uppercase; letter-spacing: 0.5px;
@@ -141,17 +177,20 @@
   .chip.tofu { background: #E0E9FF; color: var(--navy); }
   .chip.mofu { background: #FFF6D6; color: var(--amber); }
   .chip.bofu { background: #D6EDD4; color: var(--green); }
+  .chip.tl   { background: var(--purple-shade); color: var(--purple); }
   .chip.coll { background: #F1F8E9; color: #558B2F; }
   .chip.sale { background: #FCE4EC; color: #AD1457; }
   .chip.web  { background: #E0F2F1; color: #00695C; }
-  .chip.promo{ background: #EDE7F6; color: #5E35B1; }
+  .chip.promo{ background: #EDE7F6; color: var(--purple); }
   .chip.tele { background: #FFF3E0; color: #E65100; }
-  .chip.hi   { background: #D6EDD4; color: var(--green); }
-  .chip.nu   { background: #FFF6D6; color: var(--amber); }
- 
-  /* ----- Inventory (TOFU/MOFU/BOFU) ----- */
+  .chip.rich { background: var(--purple); color: #fff; }
+  .chip.both { background: var(--light-grey); color: var(--muted); }
+
+  /* ---- Inventory ---- */
   .inv-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+  .inv-grid.with-tl { grid-template-columns: 1fr 1fr 1fr 1fr; }
   .inv-col { padding: 12px; border-radius: 6px; border: 1px solid var(--border); }
+  .inv-col.tl   { background: var(--purple-shade); border-color: #C4B7E0; }
   .inv-col.tofu { background: #F0F5FB; border-color: #C4D5EA; }
   .inv-col.mofu { background: #FFF8E8; border-color: #E8D7A8; }
   .inv-col.bofu { background: #F0F8EF; border-color: #C4DBC2; }
@@ -159,6 +198,7 @@
     font-size: 11px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase;
     margin-bottom: 8px;
   }
+  .inv-col.tl .inv-hd   { color: var(--purple); }
   .inv-col.tofu .inv-hd { color: var(--blue); }
   .inv-col.mofu .inv-hd { color: var(--amber); }
   .inv-col.bofu .inv-hd { color: var(--green); }
@@ -174,17 +214,17 @@
     margin-right: 5px; text-transform: uppercase;
   }
   .inv-item .inv-p { font-size: 11px; color: var(--muted); margin-top: 2px; }
- 
-  /* ----- Asset gallery cards ----- */
+
+  /* ---- Asset gallery cards ---- */
   .cg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
   .cg-card {
     background: var(--card); border: 1px solid var(--border); border-radius: 8px;
-    padding: 14px; box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    padding: 14px; box-shadow: 0 1px 2px rgba(0,0,0,0.04); position: relative;
   }
   .cg-card .cg-hd { display: flex; gap: 6px; align-items: center; margin-bottom: 8px; flex-wrap: wrap; }
   .cg-card .cg-title { font-size: 13px; color: var(--navy); font-weight: 700; margin: 0 0 4px; }
   .cg-card .cg-gist { font-size: 11.5px; color: var(--muted); margin: 0 0 10px; min-height: 32px; }
- 
+
   .group-hd {
     font-size: 12px; color: var(--navy); font-weight: 700;
     text-transform: uppercase; letter-spacing: 1px;
@@ -199,76 +239,17 @@
     font-size: 11px; color: var(--muted); font-weight: 500; text-transform: none;
     letter-spacing: 0; margin-left: auto;
   }
- 
-  /* ----- Flow diagram ----- */
-  .flow-canvas {
-    position: relative;
-    padding: 8px 0 4px;
-  }
-  .flow-row {
-    display: grid; gap: 12px; align-items: stretch;
-    margin-bottom: 10px;
-  }
-  .flow-row.r1 { grid-template-columns: 1fr; }
-  .flow-row.r2 { grid-template-columns: 1fr 1fr; }
-  .flow-row.r3 { grid-template-columns: 1fr 1fr 1fr; }
-  .flow-row.r4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
-  .flow-node {
-    border-radius: 7px; padding: 12px 14px; font-size: 12px;
-    border: 1.5px solid var(--border); background: var(--card);
-    position: relative; min-height: 72px;
-    display: flex; flex-direction: column; justify-content: center;
-  }
-  .flow-node .fn-t { font-weight: 700; color: var(--navy); font-size: 12.5px; margin-bottom: 4px; }
-  .flow-node .fn-d { font-size: 11px; color: var(--muted); }
-  .flow-node .fn-a { font-size: 10.5px; color: var(--navy); margin-top: 5px; font-style: italic; }
-  .flow-node.start { background: #E0E9FF; border-color: var(--navy); }
-  .flow-node.hinge { background: #D7E7FB; border-color: var(--blue); border-width: 2px; }
-  .flow-node.hinge2 { background: #D6EDD4; border-color: var(--green); border-width: 2px; }
-  .flow-node.branch-yes { background: #F1F7F0; border-color: #7FB077; }
-  .flow-node.branch-no  { background: #FFF6E0; border-color: #D9B869; }
-  .flow-node.terminal-hi { background: linear-gradient(135deg, #D6EDD4 0%, #B7E0B3 100%); border-color: var(--green); border-width: 2px; }
-  .flow-node.terminal-nu { background: linear-gradient(135deg, #FFF6D6 0%, #F2E1A3 100%); border-color: var(--amber); border-width: 2px; }
-  .flow-arrow {
-    text-align: center; color: var(--muted); font-size: 18px; font-weight: 700;
-    margin: 0; padding: 0;
-  }
-  .flow-label {
-    font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px;
-    font-weight: 700; text-align: center; margin: 4px 0 2px;
-  }
-  .flow-branch-row {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 40px; position: relative;
-    margin: 6px 0;
-  }
-  .flow-branch-row::before {
-    content: ""; position: absolute; top: 0; left: 25%; width: 50%;
-    height: 14px; border-top: 2px solid var(--ph-border);
-    border-left: 2px solid var(--ph-border); border-right: 2px solid var(--ph-border);
-    border-top-left-radius: 6px; border-top-right-radius: 6px;
-    pointer-events: none;
-  }
-  .flow-branch-label {
-    position: absolute; top: -10px; background: var(--card);
-    font-size: 10px; font-weight: 700; padding: 1px 8px;
-    color: var(--navy); text-transform: uppercase; letter-spacing: 0.5px;
-    border-radius: 3px; border: 1px solid var(--ph-border);
-  }
-  .flow-branch-label.l { left: 20%; }
-  .flow-branch-label.r { right: 20%; }
-  .flow-merge {
-    text-align: center; font-size: 10px; color: var(--muted); margin: 4px 0;
-    font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
-  }
- 
-  /* ----- Intent tracks ----- */
-  .tr-toggle { display: flex; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; align-items: center; }
-  .tr-toggle button {
+  .group-hd.rich-grp { border-bottom-color: var(--purple); color: var(--purple); }
+  .group-hd.rich-grp .count { background: var(--purple); }
+
+  /* ---- Prospect Journey (H-Intent / Nurture) ---- */
+  .jr-toggle { display: flex; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; align-items: center; }
+  .jr-toggle button {
     background: var(--card); border: 1px solid var(--border); padding: 6px 12px;
     border-radius: 5px; font-size: 12px; cursor: pointer;
   }
-  .tr-toggle button.active { background: var(--navy); color: #fff; border-color: var(--navy); }
- 
+  .jr-toggle button.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+
   .tr-grid { display: grid; grid-template-columns: 90px repeat(2, 1fr); gap: 6px; }
   .tr-col-hd {
     padding: 10px; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.8px;
@@ -280,68 +261,17 @@
     padding: 10px 6px; background: var(--navy); color: #fff; border-radius: 4px;
     text-align: center; font-size: 11px; font-weight: 700;
   }
+  .tr-row-hd.tl-row { background: var(--purple); }
   .tr-cell { padding: 10px 12px; font-size: 12px; border-radius: 5px; border: 1px solid var(--border); }
   .tr-cell.hi { background: #F2FAF1; }
   .tr-cell.nu { background: #FFFBE8; }
   .tr-cell .t { font-weight: 700; font-size: 12px; color: var(--navy); display: block; margin-bottom: 3px; }
-  .tr-cell .tr-assets {
-    margin-top: 5px; font-size: 10.5px; color: var(--muted); font-style: italic;
-  }
-  .tr-cell .tr-channels {
-    margin-top: 5px; font-size: 10px; color: var(--navy); font-weight: 600;
-  }
- 
-  /* ----- Channel / ISR plays ----- */
-  .play-card {
-    background: var(--card); border: 1px solid var(--border); border-radius: 6px;
-    padding: 14px; font-size: 12px; display: flex; flex-direction: column; gap: 8px;
-  }
-  .play-card .pc-title { font-weight: 700; color: var(--navy); font-size: 13px; margin: 0; }
-  .play-card .pc-meta {
-    display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; font-size: 11px; color: var(--muted);
-  }
-  .play-card .pc-meta b { color: var(--navy); font-weight: 600; }
- 
-  .ch-tabs { display: flex; gap: 4px; margin-bottom: 16px; flex-wrap: wrap; }
-  .ch-tabs button {
-    background: var(--card); border: 1px solid var(--border); padding: 8px 14px;
-    border-radius: 5px; font-size: 12.5px; cursor: pointer;
-  }
-  .ch-tabs button.active {
-    background: var(--navy); color: #fff; border-color: var(--navy); font-weight: 600;
-  }
-  .ch-panel { display: none; }
-  .ch-panel.active { display: block; }
- 
-  /* ----- ISR / Tele ----- */
-  .tele-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  .tele-card {
-    border: 1px solid var(--border); border-radius: 8px; padding: 16px;
-    background: var(--card);
-  }
-  .tele-card.webinar { border-top: 4px solid var(--blue); }
-  .tele-card.workshop { border-top: 4px solid var(--green); }
-  .tele-card h3 {
-    margin: 0 0 6px; color: var(--navy); font-size: 14px;
-    text-transform: none; letter-spacing: 0;
-  }
-  .tele-card .tele-sub { font-size: 11.5px; color: var(--muted); margin-bottom: 10px; }
-  .tele-card .tele-step {
-    display: grid; grid-template-columns: 26px 1fr; gap: 8px; font-size: 12px;
-    padding: 6px 0; border-bottom: 1px dashed var(--border);
-  }
-  .tele-card .tele-step:last-of-type { border-bottom: none; }
-  .tele-card .tele-num {
-    background: var(--navy); color: #fff; border-radius: 50%; width: 22px; height: 22px;
-    font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center;
-  }
-  .tele-card .tele-b { color: var(--navy); font-weight: 600; }
- 
-  /* ----- Classification summary ----- */
+  .tr-cell .tr-assets { margin-top: 5px; font-size: 10.5px; color: var(--muted); font-style: italic; }
+  .tr-cell .tr-channels { margin-top: 5px; font-size: 10px; color: var(--navy); font-weight: 600; }
+
+  /* Classification cards */
   .cls-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  .cls-card {
-    border-radius: 8px; padding: 16px; border: 1.5px solid;
-  }
+  .cls-card { border-radius: 8px; padding: 16px; border: 1.5px solid; }
   .cls-card.hi {
     background: linear-gradient(135deg, #F1F7F0 0%, #E0F0DC 100%);
     border-color: var(--green);
@@ -353,13 +283,77 @@
   .cls-card h3 { font-size: 14px; margin: 0 0 6px; text-transform: none; letter-spacing: 0; }
   .cls-card.hi h3 { color: var(--green); }
   .cls-card.nu h3 { color: var(--amber); }
-  .cls-card .cls-def {
-    font-size: 12px; color: var(--navy); margin-bottom: 10px; font-weight: 600;
-  }
+  .cls-card .cls-def { font-size: 12px; color: var(--navy); margin-bottom: 10px; font-weight: 600; }
   .cls-card ul { margin: 6px 0 0; padding-left: 18px; font-size: 12px; }
   .cls-card li { margin-bottom: 4px; }
- 
-  /* ----- Predict ----- */
+
+  /* ---- Channel Mix ---- */
+  .ch-tabs { display: flex; gap: 4px; margin-bottom: 16px; flex-wrap: wrap; }
+  .ch-tabs button {
+    background: var(--card); border: 1px solid var(--border); padding: 8px 14px;
+    border-radius: 5px; font-size: 12.5px; cursor: pointer;
+  }
+  .ch-tabs button.active {
+    background: var(--navy); color: #fff; border-color: var(--navy); font-weight: 600;
+  }
+  .ch-tabs button.rich-only-btn { border-color: var(--purple); color: var(--purple); }
+  .ch-tabs button.rich-only-btn.active { background: var(--purple); color: #fff; border-color: var(--purple); }
+  .ch-panel { display: none; }
+  .ch-panel.active { display: block; }
+
+  .play-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 6px;
+    padding: 14px; font-size: 12px; display: flex; flex-direction: column; gap: 8px;
+  }
+  .play-card .pc-title { font-weight: 700; color: var(--navy); font-size: 13px; margin: 0; }
+  .play-card .pc-meta {
+    display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; font-size: 11px; color: var(--muted);
+  }
+  .play-card .pc-meta b { color: var(--navy); font-weight: 600; }
+
+  /* ---- Hand-Raiser Fast-Path ---- */
+  .trigger-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 14px; }
+  .trigger-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 12px;
+    cursor: pointer; font-size: 12px;
+  }
+  .trigger-card:hover { border-color: var(--navy); box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+  .trigger-card.active { border: 2px solid var(--navy); background: #F0F4FB; }
+  .trigger-card .tr-t { font-weight: 700; color: var(--navy); margin-bottom: 4px; font-size: 12.5px; }
+  .trigger-card .tr-src { font-size: 11px; color: var(--muted); }
+  .trigger-card .tr-lane {
+    display: inline-block; font-size: 9.5px; font-weight: 700; padding: 2px 6px; border-radius: 2px;
+    margin-top: 5px; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .trigger-card .tr-lane.a { background: var(--blue-shade); color: var(--navy); }
+  .trigger-card .tr-lane.b { background: var(--h-shade); color: var(--green); }
+  .trigger-card .tr-lane.c { background: var(--purple-shade); color: var(--purple); }
+
+  .detail-panel {
+    background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 18px;
+    margin-bottom: 14px;
+  }
+  .detail-panel h3 { color: var(--navy); margin: 0 0 8px; font-size: 14px; text-transform: none; letter-spacing: 0; }
+  .route-flow { display: flex; align-items: center; gap: 8px; margin: 10px 0; flex-wrap: wrap; font-size: 12px; }
+  .route-node { padding: 6px 10px; border-radius: 4px; background: var(--light-grey); font-weight: 600; }
+  .route-node.a { background: var(--blue-shade); color: var(--navy); }
+  .route-node.b { background: var(--h-shade); color: var(--green); }
+  .route-node.c { background: var(--purple-shade); color: var(--purple); }
+  .route-arr { color: var(--muted); }
+
+  .sla-ladder { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; font-size: 12px; margin-top: 8px; }
+  .sla-step { background: var(--card); border: 1px solid var(--border); padding: 10px; border-radius: 5px; }
+  .sla-step .sla-t { font-weight: 600; color: var(--navy); font-size: 11.5px; margin-bottom: 3px; }
+  .sla-step .sla-v { font-size: 11px; color: var(--muted); }
+
+  .guardrails { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 12px; }
+  .guard {
+    background: #FFF6E0; border-left: 3px solid var(--amber); padding: 10px 12px; font-size: 11.5px;
+    border-radius: 3px;
+  }
+  .guard b { color: var(--amber); font-weight: 700; }
+
+  /* ---- Outcome Prediction ---- */
   .predict-grid { display: grid; grid-template-columns: 2fr 3fr; gap: 18px; }
   .sliders .slider-row {
     display: grid; grid-template-columns: 1fr 70px; gap: 10px; align-items: center;
@@ -369,7 +363,7 @@
   .sliders .slider-row .hint { font-size: 11px; color: var(--muted); }
   .sliders input[type="range"] { width: 100%; }
   .sliders .val { text-align: right; font-weight: 700; color: var(--navy); font-variant-numeric: tabular-nums; }
- 
+
   .pred-funnel .pred-stage {
     display: grid; grid-template-columns: 200px 1fr 80px; gap: 10px; align-items: center;
     padding: 6px 0; font-size: 12px;
@@ -379,8 +373,10 @@
   .pred-bar .bf { background: var(--navy); height: 100%; transition: width 0.3s; }
   .pred-bar.hi .bf { background: var(--green); }
   .pred-bar.nu .bf { background: var(--amber); }
+  .pred-bar.tl .bf { background: var(--purple); }
+  .pred-bar.rt .bf { background: var(--purple); }
   .pred-funnel .pv { text-align: right; font-weight: 700; color: var(--navy); font-variant-numeric: tabular-nums; }
- 
+
   .summary-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 18px; }
   .sk-card {
     background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 14px;
@@ -390,43 +386,55 @@
   .sk-card .sk-v { font-size: 26px; font-weight: 700; color: var(--navy); font-variant-numeric: tabular-nums; }
   .sk-card.green .sk-v { color: var(--green); }
   .sk-card.amber .sk-v { color: var(--amber); }
- 
+  .sk-card.purple .sk-v { color: var(--purple); }
+
   footer { padding: 16px 28px; text-align: center; font-size: 11px; color: var(--muted); }
- 
+
   .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 11px; color: var(--muted); margin-top: 10px; }
   .legend .sw {
     display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 4px;
     vertical-align: middle;
   }
- 
+
+  /* Variant indicator pill */
+  .variant-pill {
+    display: inline-block; padding: 2px 8px; font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.6px; border-radius: 3px;
+  }
+  .variant-pill.lean { background: var(--blue-shade); color: var(--navy); }
+  .variant-pill.rich { background: var(--purple); color: #fff; }
+
   /* ====== RESPONSIVE ====== */
   @media (max-width: 1100px) {
     main { padding: 20px 20px 36px; }
     .kpi-strip { grid-template-columns: repeat(3, 1fr); }
     .scope-grid { grid-template-columns: 1fr; }
-    .inv-grid { grid-template-columns: 1fr; gap: 10px; }
+    .inv-grid, .inv-grid.with-tl { grid-template-columns: 1fr; gap: 10px; }
     .cg-grid { grid-template-columns: repeat(2, 1fr); }
     .row.g3, .row.g4 { grid-template-columns: repeat(2, 1fr); }
     .predict-grid { grid-template-columns: 1fr; gap: 20px; }
-    .pred-funnel .pred-stage { grid-template-columns: 160px 1fr 70px; }
+    .pred-funnel .pred-stage { grid-template-columns: 170px 1fr 70px; }
     .summary-kpis { grid-template-columns: repeat(2, 1fr); }
-  }
- 
-  @media (max-width: 820px) {
-    .timeline { grid-template-columns: repeat(3, 1fr); }
-    .tele-wrap { grid-template-columns: 1fr; }
     .cls-grid { grid-template-columns: 1fr; }
-    .flow-row.r3, .flow-row.r4 { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 820px) {
+    .timeline.t8  { grid-template-columns: repeat(4, 1fr); }
+    .timeline.t12 { grid-template-columns: repeat(4, 1fr); }
+    .trigger-grid { grid-template-columns: repeat(2, 1fr); }
+    .sla-ladder, .guardrails { grid-template-columns: repeat(2, 1fr); }
     .tr-grid { grid-template-columns: 72px repeat(2, 1fr); gap: 4px; font-size: 11px; }
     .tr-grid .tr-cell { padding: 8px 10px; font-size: 11.5px; }
     .tr-grid .tr-col-hd { padding: 8px 4px; font-size: 10.5px; }
     .tr-grid .tr-row-hd { padding: 8px 4px; font-size: 10.5px; }
   }
- 
+
   @media (max-width: 620px) {
-    header.site { padding: 16px 16px; }
+    header.site { padding: 14px 14px 12px; }
     header.site h1 { font-size: 17px; line-height: 1.25; }
     header.site .sub { font-size: 11.5px; }
+    .variant-bar { padding: 10px 14px; }
+    .vt-btn { min-width: 100%; }
     main { padding: 14px 12px 28px; }
     .kpi-strip { grid-template-columns: repeat(2, 1fr); }
     .kpi { padding: 10px 12px; }
@@ -437,39 +445,29 @@
     .card h2 { font-size: 14.5px; }
     .cg-grid { grid-template-columns: 1fr; gap: 10px; }
     .row.g2, .row.g3, .row.g4 { grid-template-columns: 1fr; }
-    .timeline { grid-template-columns: repeat(2, 1fr); }
-    .tl-week { min-height: 58px; }
+    .timeline.t8  { grid-template-columns: repeat(2, 1fr); }
+    .timeline.t12 { grid-template-columns: repeat(3, 1fr); }
+    .tl-week { min-height: 60px; }
     .pred-funnel .pred-stage { grid-template-columns: 130px 1fr 52px; font-size: 11px; gap: 6px; }
     .sliders .slider-row { grid-template-columns: 1fr 60px; font-size: 12px; }
     .sliders .slider-row .hint { font-size: 10.5px; }
     .sk-card .sk-v { font-size: 22px; }
-    /* Flow rows + branch stacking */
-    .flow-row.r2, .flow-row.r3, .flow-row.r4 { grid-template-columns: 1fr; }
-    .flow-branch-row { grid-template-columns: 1fr; gap: 10px; }
-    .flow-branch-row::before { display: none; }
-    .flow-branch-label {
-      position: static; display: inline-block; margin: 2px 0 4px;
-      background: var(--light-grey);
-    }
-    /* Matrix grid collapse */
-    .tr-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
+    .trigger-grid, .sla-ladder, .guardrails { grid-template-columns: 1fr; }
+    .ch-tabs { gap: 3px; }
+    .ch-tabs button { padding: 7px 10px; font-size: 11.5px; }
+    /* Matrix grid → stacked */
+    .tr-grid { display: flex; flex-direction: column; gap: 4px; }
     .tr-grid > div:first-child { display: none; }
-    .tr-grid .tr-col-hd {
-      text-align: left; padding: 8px 12px; font-size: 11px;
-    }
-    .tr-grid .tr-row-hd {
-      text-align: left; padding: 8px 12px; font-size: 12px; margin-top: 8px; border-radius: 4px;
-    }
+    .tr-grid .tr-col-hd { text-align: left; padding: 8px 12px; font-size: 11px; }
+    .tr-grid .tr-row-hd { text-align: left; padding: 8px 12px; font-size: 12px; margin-top: 8px; border-radius: 4px; }
     .tr-grid .tr-row-hd br { display: none; }
     .tr-grid .tr-cell { font-size: 12px; padding: 10px 12px; }
-    .tr-toggle { gap: 6px; }
-    .tr-toggle button { padding: 5px 10px; font-size: 11.5px; }
+    .jr-toggle { gap: 6px; }
+    .jr-toggle button { padding: 5px 10px; font-size: 11.5px; }
+    .route-flow { font-size: 11px; gap: 6px; }
+    .route-node { padding: 5px 8px; font-size: 11px; }
   }
- 
+
   @media (max-width: 420px) {
     .kpi-strip { grid-template-columns: 1fr 1fr; }
     header.site h1 { font-size: 15.5px; }
@@ -479,485 +477,539 @@
   }
 </style>
 </head>
-<body>
- 
+<body data-variant="lean">
+
 <header class="site">
-  <div class="eyebrow">Mini Campaign Blueprint · Template</div>
-  <h1>8-Week Mini Campaign — High-Intent &amp; Nurture Tracks</h1>
-  <div class="sub">Offering-agnostic framework · ~50 Target Accounts · Webinar (W4) + Diagnostic Workshop (W7) hinge · For VP approval</div>
+  <div class="eyebrow">Campaign in a Box · Template</div>
+  <h1>Lean &amp; Rich Variants — High-Intent &amp; Nurture Tracks</h1>
+  <div class="sub">
+    <span class="ln-only">Lean variant active · ~50 TAL · 8-week motion · 1:1 diagnostic workshop</span>
+    <span class="rh-only">Rich variant active · 50–80 TAL · 12-week motion (4 wk TL pre-launch + 8 wk core) · Round table + 1:1 diagnostic alongside</span>
+  </div>
 </header>
- 
-<div class="kpi-strip">
-  <div class="kpi"><div class="lbl">Target Accounts</div><div class="val">~50</div><div class="v2">TAL + prospects</div></div>
-  <div class="kpi"><div class="lbl">Duration</div><div class="val">8 wk</div><div class="v2">Webinar W4 · Workshop W7</div></div>
-  <div class="kpi"><div class="lbl">Asset Bundle</div><div class="val">18</div><div class="v2">Collateral · Sales · Web · Promo</div></div>
-  <div class="kpi"><div class="lbl">Hinge Points</div><div class="val">2</div><div class="v2">Webinar · Diagnostic Workshop</div></div>
-  <div class="kpi"><div class="lbl">Output Tracks</div><div class="val">2</div><div class="v2">High-Intent · Nurture</div></div>
+
+<div class="variant-bar">
+  <span class="vt-label">Variant</span>
+  <button class="vt-btn active" data-variant="lean">
+    <span class="vt-name">Lean</span>
+    <span class="vt-tag">Majority offerings · 8 wk · ~50 TAL · 1:1 workshop</span>
+  </button>
+  <button class="vt-btn" data-variant="rich">
+    <span class="vt-name">Rich</span>
+    <span class="vt-tag">Priority offerings · 12 wk · 50–80 TAL · TL + Round table + 1:1</span>
+  </button>
 </div>
- 
+
+<div class="kpi-strip">
+  <div class="kpi"><div class="lbl">Target Accounts</div>
+    <div class="val"><span class="ln-only">~50</span><span class="rh-only">50–80</span></div>
+    <div class="v2"><span class="ln-only">TAL + prospects</span><span class="rh-only">Priority offering · ABM</span></div>
+  </div>
+  <div class="kpi"><div class="lbl">Duration</div>
+    <div class="val"><span class="ln-only">8 wk</span><span class="rh-only">12 wk</span></div>
+    <div class="v2"><span class="ln-only">Webinar W4 · Workshop W7</span><span class="rh-only">TL W1-W4 · Webinar W8 · Workshop W11</span></div>
+  </div>
+  <div class="kpi"><div class="lbl">Asset Bundle</div>
+    <div class="val"><span class="ln-only">24</span><span class="rh-only">31</span></div>
+    <div class="v2"><span class="ln-only">Coll · Sales · Web · Promo · Tele</span><span class="rh-only">+ TL layer + Round Table</span></div>
+  </div>
+  <div class="kpi"><div class="lbl">Hinge Points</div>
+    <div class="val"><span class="ln-only">2</span><span class="rh-only">3</span></div>
+    <div class="v2"><span class="ln-only">Webinar · Workshop</span><span class="rh-only">Webinar · Round Table · 1:1 Workshop</span></div>
+  </div>
+  <div class="kpi"><div class="lbl">Output Tracks</div>
+    <div class="val">2</div>
+    <div class="v2">High-Intent · Nurture</div>
+  </div>
+</div>
+
 <nav class="tabs" id="tabnav">
   <button class="active" data-tab="overview">Overview</button>
-  <button data-tab="flow">Campaign Flow</button>
-  <button data-tab="assets">Asset Inventory</button>
-  <button data-tab="tracks">Intent Tracks</button>
-  <button data-tab="tele">Tele / ISR Plays</button>
-  <button data-tab="predict">Predict</button>
+  <button data-tab="library">Content &amp; Asset Library</button>
+  <button data-tab="journey">Prospect Journey</button>
+  <button data-tab="channels">Channel Mix</button>
+  <button data-tab="fastpath">Hand-Raiser Fast-Path</button>
+  <button data-tab="predict">Outcome Prediction</button>
 </nav>
- 
+
 <main>
- 
+
 <!-- ============ OVERVIEW ============ -->
 <div class="panel active" id="overview">
   <div class="card" style="margin-bottom:18px;">
-    <h2>Scope Locks</h2>
+    <h2>Scope Locks <span class="variant-pill lean ln-only">Lean</span><span class="variant-pill rich rh-only">Rich</span></h2>
     <div class="scope-grid">
       <div class="scope-box in">
         <div class="hd">In</div>
-        <ul>
-          <li>Mini campaign for one offering · offering-agnostic template</li>
+        <ul class="ln-only">
+          <li>One offering · template repurposable</li>
           <li>~50 target accounts (TAL + direct prospects)</li>
           <li>8-week cycle — Webinar W4, Workshop W7, Classification W8</li>
           <li>Channels: Email · LinkedIn (Organic + Paid) · Website · Tele/ISR</li>
-          <li>Webinar (with demo, where applicable) + Diagnostic Workshop as hinges</li>
-          <li>Classify outputs at end into <b>High-Intent</b> (attended workshop) or <b>Nurture</b> (registered, did not attend)</li>
+          <li>Webinar (with demo where applicable) + 1:1 Diagnostic Workshop hinges</li>
+          <li>Classify outputs at end into <b>High-Intent</b> (attended workshop) or <b>Nurture</b></li>
+        </ul>
+        <ul class="rh-only">
+          <li>One <b>priority</b> offering · template repurposable</li>
+          <li>50–80 target accounts · ~200+ practitioners reached at the webinar</li>
+          <li>12-week cycle — TL pre-launch W1-W4 · Webinar W8 · Workshop W11 · Classify W12</li>
+          <li>Channels: Email · LinkedIn (Organic + Paid) · Website · Tele/ISR · Thought Leadership</li>
+          <li>Three hinges: Practitioner Webinar (with demo), Executive Round Table (top-5), 1:1 Diagnostic Workshop (next tier)</li>
+          <li>Classify into <b>High-Intent</b> (attended round table OR 1:1 workshop) or <b>Nurture</b></li>
         </ul>
       </div>
       <div class="scope-box out">
         <div class="hd">Out</div>
-        <ul>
-          <li>Net-new demand gen beyond the supplied TAL + prospect list</li>
+        <ul class="ln-only">
+          <li>Net-new demand gen beyond TAL + prospect list</li>
           <li>Paid search · programmatic · syndication · events</li>
           <li>Industry-specific tailoring (template is generic)</li>
           <li>Multi-offering bundling</li>
-          <li>Post-workshop delivery (Pursuit handoff lives with the AE)</li>
           <li>Anything beyond the 8-week window</li>
+        </ul>
+        <ul class="rh-only">
+          <li>Net-new demand gen beyond TAL + qualified adjacency</li>
+          <li>Paid search · programmatic</li>
+          <li>Multi-offering bundling (priority offering carries the campaign)</li>
+          <li>Use of round table for non-priority offerings</li>
+          <li>Anything beyond the 12-week window</li>
         </ul>
       </div>
     </div>
   </div>
- 
+
   <div class="card" style="margin-bottom:18px;">
-    <h2>Asset Bundle — by Category and Funnel Stage</h2>
-    <p class="lead">Four production families feed the campaign. Funnel stage chip (TOFU / MOFU / BOFU) appears on every item in the Asset Inventory tab.</p>
-    <div class="inv-grid">
-      <div class="inv-col tofu">
-        <div class="inv-hd">TOFU — First Touch</div>
-        <div class="inv-sub">Outreach openers &amp; interest capture</div>
-        <div class="inv-item"><span class="inv-type">Collateral</span><span class="inv-t">CL1 · Offering 1-Slide</span><div class="inv-p">Anchor opener · paste in email, post, LI DM.</div></div>
-        <div class="inv-item"><span class="inv-type">Collateral</span><span class="inv-t">CL2 · Offering Brochure</span><div class="inv-p">Leave-behind · send-ahead.</div></div>
-        <div class="inv-item"><span class="inv-type">Web Doc</span><span class="inv-t">WD1 · Offering Landing Page</span><div class="inv-p">Central CTA capture for interest.</div></div>
-        <div class="inv-item"><span class="inv-type">Sales</span><span class="inv-t">SE5 · Ready Reckoner</span><div class="inv-p">Targeting · buying signals · responses.</div></div>
+    <h2>Asset Bundle — by Funnel Stage</h2>
+    <p class="lead">Four production families feed both variants. <span class="rh-only">Rich adds a Thought Leadership layer that pre-warms the market for 4 weeks before outreach kicks in.</span> Funnel stage chip on every item in the Asset Library tab.</p>
+
+    <div class="ln-only">
+      <div class="inv-grid">
+        <div class="inv-col tofu">
+          <div class="inv-hd">TOFU — First Touch</div>
+          <div class="inv-sub">Outreach openers &amp; interest capture</div>
+          <div class="inv-item"><span class="inv-type">Coll</span><span class="inv-t">CL1 · Offering 1-Slide</span><div class="inv-p">Anchor opener · email/post/DM.</div></div>
+          <div class="inv-item"><span class="inv-type">Coll</span><span class="inv-t">CL2 · Offering Brochure</span><div class="inv-p">Leave-behind · send-ahead.</div></div>
+          <div class="inv-item"><span class="inv-type">Web</span><span class="inv-t">WD1 · Offering LP</span><div class="inv-p">Central CTA capture for interest.</div></div>
+          <div class="inv-item"><span class="inv-type">Sales</span><span class="inv-t">SE5 · Ready Reckoner</span><div class="inv-p">Targeting · buying signals · responses.</div></div>
+        </div>
+        <div class="inv-col mofu">
+          <div class="inv-hd">MOFU — Webinar Hinge</div>
+          <div class="inv-sub">Proof · consideration · seller enablement</div>
+          <div class="inv-item"><span class="inv-type">Web</span><span class="inv-t">WD2/WD3 · Webinar Outline + LP</span><div class="inv-p">Recruitment + registration capture.</div></div>
+          <div class="inv-item"><span class="inv-type">Coll</span><span class="inv-t">CL3a-c · 3× Success Story 1-Slide</span><div class="inv-p">Snippets for pre/post-event social proof.</div></div>
+          <div class="inv-item"><span class="inv-type">Coll</span><span class="inv-t">CL4-CL6 · 3× Success Stories (2pp)</span><div class="inv-p">Depth proof bundle for attendees.</div></div>
+          <div class="inv-item"><span class="inv-type">Sales</span><span class="inv-t">SE1/SE2 · Client Decks (Biz + Tech)</span><div class="inv-p">Stakeholder-specific narratives.</div></div>
+          <div class="inv-item"><span class="inv-type">Sales</span><span class="inv-t">SE3/SE4 · Battle Cards + Objection Guide</span><div class="inv-p">vs Market alternatives + pitch ammo.</div></div>
+        </div>
+        <div class="inv-col bofu">
+          <div class="inv-hd">BOFU — Workshop Conversion</div>
+          <div class="inv-sub">1:1 diagnostic = the classification hinge</div>
+          <div class="inv-item"><span class="inv-type">Web</span><span class="inv-t">WD4/WD5 · Workshop Outline + LP</span><div class="inv-p">Recruitment into 1:1 diagnostic workshop.</div></div>
+          <div class="inv-item"><span class="inv-type">Tele</span><span class="inv-t">TE2 · Workshop Recruitment Call</span><div class="inv-p">Book &amp; confirm + no-show recovery.</div></div>
+        </div>
       </div>
-      <div class="inv-col mofu">
-        <div class="inv-hd">MOFU — Webinar Hinge</div>
-        <div class="inv-sub">Proof · consideration · seller enablement</div>
-        <div class="inv-item"><span class="inv-type">Web Doc</span><span class="inv-t">WD2/WD3 · Webinar Outline + LP</span><div class="inv-p">TA recruitment + registration capture.</div></div>
-        <div class="inv-item"><span class="inv-type">Collateral</span><span class="inv-t">CL3 · Success Story 1-Slide</span><div class="inv-p">Social proof snippet for pre/post-event.</div></div>
-        <div class="inv-item"><span class="inv-type">Collateral</span><span class="inv-t">CL4-CL6 · 3× Success Stories (2pp)</span><div class="inv-p">Depth proof bundle for attendees.</div></div>
-        <div class="inv-item"><span class="inv-type">Sales</span><span class="inv-t">SE1/SE2 · Client Decks (Biz + Tech)</span><div class="inv-p">Stakeholder-specific narratives.</div></div>
-        <div class="inv-item"><span class="inv-type">Sales</span><span class="inv-t">SE3/SE4 · Battle Cards + Objection Guide</span><div class="inv-p">vs Market alternatives + pitch ammo.</div></div>
-      </div>
-      <div class="inv-col bofu">
-        <div class="inv-hd">BOFU — Workshop Conversion</div>
-        <div class="inv-sub">Diagnostic workshop = the classification hinge</div>
-        <div class="inv-item"><span class="inv-type">Web Doc</span><span class="inv-t">WD4/WD5 · Workshop Outline + LP</span><div class="inv-p">TA recruitment into diagnostic workshop.</div></div>
-        <div class="inv-item"><span class="inv-type">Tele</span><span class="inv-t">TE2 · Workshop Recruitment Call</span><div class="inv-p">Book &amp; confirm + no-show recovery.</div></div>
+    </div>
+
+    <div class="rh-only">
+      <div class="inv-grid with-tl">
+        <div class="inv-col tl">
+          <div class="inv-hd">TL — Pre-Launch</div>
+          <div class="inv-sub">Market warming · 4 weeks before outreach</div>
+          <div class="inv-item"><span class="inv-type">Hero</span><span class="inv-t">TL1 · Hero Research / eBook</span><div class="inv-p">Analyst-validated long-form anchor.</div></div>
+          <div class="inv-item"><span class="inv-type">Promo</span><span class="inv-t">TL2 · Exec LinkedIn Article #1</span><div class="inv-p">Practice lead byline.</div></div>
+          <div class="inv-item"><span class="inv-type">Promo</span><span class="inv-t">TL3 · Exec LinkedIn Article #2</span><div class="inv-p">Co-author / industry SME byline.</div></div>
+          <div class="inv-item"><span class="inv-type">Promo</span><span class="inv-t">TL4 · Short Video / Podcast Clip</span><div class="inv-p">2-3 min exec POV.</div></div>
+        </div>
+        <div class="inv-col tofu">
+          <div class="inv-hd">TOFU — First Touch</div>
+          <div class="inv-sub">Activated by TL signals + outbound</div>
+          <div class="inv-item"><span class="inv-type">Coll</span><span class="inv-t">CL1 · Offering 1-Slide</span><div class="inv-p">Anchor opener.</div></div>
+          <div class="inv-item"><span class="inv-type">Coll</span><span class="inv-t">CL2 · Offering Brochure</span><div class="inv-p">Leave-behind / send-ahead.</div></div>
+          <div class="inv-item"><span class="inv-type">Web</span><span class="inv-t">WD1 · Offering LP</span><div class="inv-p">Central CTA capture.</div></div>
+          <div class="inv-item"><span class="inv-type">Sales</span><span class="inv-t">SE5 · Ready Reckoner</span><div class="inv-p">Targeting · signals · responses.</div></div>
+        </div>
+        <div class="inv-col mofu">
+          <div class="inv-hd">MOFU — Practitioner Webinar</div>
+          <div class="inv-sub">200+ practitioners · with demo</div>
+          <div class="inv-item"><span class="inv-type">Web</span><span class="inv-t">WD2/WD3 · Webinar Outline + LP</span><div class="inv-p">Practitioner-targeted recruitment.</div></div>
+          <div class="inv-item"><span class="inv-type">Coll</span><span class="inv-t">CL3a-c · 3× Success Story 1-Slide</span><div class="inv-p">Pre/post-event proof snippets.</div></div>
+          <div class="inv-item"><span class="inv-type">Coll</span><span class="inv-t">CL4-CL6 · 3× Success Stories (2pp)</span><div class="inv-p">Depth proof bundle.</div></div>
+          <div class="inv-item"><span class="inv-type">Sales</span><span class="inv-t">SE1/SE2 · Decks (Biz + Tech)</span><div class="inv-p">Stakeholder narratives.</div></div>
+          <div class="inv-item"><span class="inv-type">Sales</span><span class="inv-t">SE3/SE4 · Battle Cards + Objection Guide</span><div class="inv-p">Competitive + pitch ammo.</div></div>
+        </div>
+        <div class="inv-col bofu">
+          <div class="inv-hd">BOFU — Round Table + 1:1</div>
+          <div class="inv-sub">Top-5 round table + next-tier 1:1 diagnostic</div>
+          <div class="inv-item"><span class="inv-type">Web</span><span class="inv-t">WD6/WD7 · Round Table Outline + LP</span><div class="inv-p">Top-5 priority execs · fast-tracked.</div></div>
+          <div class="inv-item"><span class="inv-type">Web</span><span class="inv-t">WD4/WD5 · 1:1 Workshop Outline + LP</span><div class="inv-p">Next-tier diagnostic capture.</div></div>
+          <div class="inv-item"><span class="inv-type">Tele</span><span class="inv-t">TE3 · Round Table Recruitment</span><div class="inv-p">White-glove exec dials.</div></div>
+          <div class="inv-item"><span class="inv-type">Tele</span><span class="inv-t">TE2 · 1:1 Workshop Recruitment</span><div class="inv-p">Standard workshop dials.</div></div>
+        </div>
       </div>
     </div>
   </div>
- 
+
   <div class="card">
-    <h2>8-Week Timeline</h2>
-    <div class="timeline">
-      <div class="tl-week"><div class="wk">W1</div><div class="wk-tag">Set-up</div>TAL + prospects finalized · LPs + tracking live · asset audit · tele briefed</div>
-      <div class="tl-week"><div class="wk">W2</div><div class="wk-tag">Outreach</div>Core assets drop (CL1/CL2) · email T1 · LI organic + paid start · SE5 signal watch</div>
-      <div class="tl-week"><div class="wk">W3</div><div class="wk-tag">Webinar Recruit</div>WD2/WD3 live · CL3 snippet · tele 1st pass · personalized invites to Tier-1</div>
-      <div class="tl-week hinge"><div class="wk">W4</div><div class="wk-tag">Webinar Hinge</div><b>Webinar LIVE</b> · demo where applicable · post-event segmentation same night</div>
-      <div class="tl-week"><div class="wk">W5</div><div class="wk-tag">Proof</div>CL4-CL6 delivered to attendees · replay drip to no-shows · workshop teaser</div>
-      <div class="tl-week"><div class="wk">W6</div><div class="wk-tag">Workshop Recruit</div>WD4/WD5 live · TE2 dials · pre-work questionnaire sent · AE+SA alignment</div>
-      <div class="tl-week hinge"><div class="wk">W7</div><div class="wk-tag">Workshop Hinge</div><b>Diagnostic Workshops</b> held · SE decks + battle cards in play · no-show recovery loop</div>
-      <div class="tl-week hinge2"><div class="wk">W8</div><div class="wk-tag">Classify</div><b>Classify</b> · High-Intent → Pursuit handoff to AE · Nurture → drip re-entry</div>
+    <h2>Timeline</h2>
+    <div class="ln-only">
+      <div class="timeline t8">
+        <div class="tl-week"><div class="wk">W1</div><div class="wk-tag">Set-up</div>TAL + prospects finalized · LPs + tracking live · asset audit · tele briefed</div>
+        <div class="tl-week"><div class="wk">W2</div><div class="wk-tag">Outreach</div>Core assets drop (CL1/CL2) · email T1 · LI organic + paid start · SE5 signal watch</div>
+        <div class="tl-week"><div class="wk">W3</div><div class="wk-tag">Webinar Recruit</div>WD2/WD3 live · CL3a-c snippets · tele 1st pass · personalized invites to Tier-1</div>
+        <div class="tl-week hinge"><div class="wk">W4</div><div class="wk-tag">Webinar Hinge</div><b>Webinar LIVE</b> · demo where applicable · post-event segmentation same night</div>
+        <div class="tl-week"><div class="wk">W5</div><div class="wk-tag">Proof</div>CL4-CL6 delivered to attendees · replay drip to no-shows · workshop teaser</div>
+        <div class="tl-week"><div class="wk">W6</div><div class="wk-tag">Workshop Recruit</div>WD4/WD5 live · TE2 dials · pre-work questionnaire sent · AE+SA alignment</div>
+        <div class="tl-week hinge"><div class="wk">W7</div><div class="wk-tag">Workshop</div><b>1:1 Diagnostic Workshops</b> · SE decks + battle cards in play · no-show recovery</div>
+        <div class="tl-week hinge2"><div class="wk">W8</div><div class="wk-tag">Classify</div><b>Classify</b> · High-Intent → Pursuit handoff · Nurture → drip re-entry</div>
+      </div>
+      <div class="legend">
+        <span><span class="sw" style="background:#D7E7FB;border:1px solid var(--blue);"></span>Hinge — Webinar (W4) &amp; Workshop (W7)</span>
+        <span><span class="sw" style="background:#D6EDD4;border:1px solid var(--green);"></span>Classification (W8)</span>
+        <span><span class="sw" style="background:var(--light-grey);"></span>Standard week</span>
+      </div>
     </div>
-    <div class="legend">
-      <span><span class="sw" style="background:#D7E7FB;border:1px solid var(--blue);"></span>Hinge — Webinar (W4) &amp; Workshop (W7)</span>
-      <span><span class="sw" style="background:#D6EDD4;border:1px solid var(--green);"></span>Classification (W8)</span>
-      <span><span class="sw" style="background:var(--light-grey);"></span>Standard week</span>
-    </div>
-  </div>
-</div>
- 
-<!-- ============ FLOW ============ -->
-<div class="panel" id="flow">
-  <div class="card" style="margin-bottom:14px;">
-    <h2>End-to-End Campaign Flow</h2>
-    <p class="lead">Single-lane view of the campaign from list to classification. Branches occur at two points: after webinar registration (attend / no-show), and after workshop registration (attend / no-show). The second branch produces the two output tracks.</p>
- 
-    <div class="flow-canvas">
- 
-      <div class="flow-row r1">
-        <div class="flow-node start">
-          <div class="fn-t">1 · Target Account List + Prospects</div>
-          <div class="fn-d">TAL from ABM, direct prospects from sales — merged + de-duped.</div>
-          <div class="fn-a">Assets: SE5 Ready Reckoner (targeting &amp; signals)</div>
-        </div>
+
+    <div class="rh-only">
+      <div class="timeline t12">
+        <div class="tl-week tl-block"><div class="wk">W1</div><div class="wk-tag">TL Hero</div>TL1 hero research / eBook launches · gated LP live · analyst foreword</div>
+        <div class="tl-week tl-block"><div class="wk">W2</div><div class="wk-tag">TL Promo</div>TL2 exec article · LI paid amplification · TL1 download tracking</div>
+        <div class="tl-week tl-block"><div class="wk">W3</div><div class="wk-tag">TL Promo</div>TL3 second exec article · podcast/video TL4 drops</div>
+        <div class="tl-week tl-block"><div class="wk">W4</div><div class="wk-tag">TL Wrap</div>TL engagement signals harvested · TAL refined · core motion preps</div>
+        <div class="tl-week"><div class="wk">W5</div><div class="wk-tag">Outreach</div>Core assets drop (CL1/CL2) · email T1 · LI organic continues · TL re-targeting</div>
+        <div class="tl-week"><div class="wk">W6</div><div class="wk-tag">Engagement</div>Email T2 · tele 1st pass on TL-engaged accounts · WD1 traffic tracking</div>
+        <div class="tl-week"><div class="wk">W7</div><div class="wk-tag">Webinar Recruit</div>WD2/WD3 live · CL3a-c snippets · tele push · 200+ practitioner recruitment</div>
+        <div class="tl-week hinge"><div class="wk">W8</div><div class="wk-tag">Webinar Hinge</div><b>Webinar LIVE</b> · 200+ practitioners · demo · post-event segmentation</div>
+        <div class="tl-week"><div class="wk">W9</div><div class="wk-tag">Proof</div>CL4-CL6 delivered · TE3 dials top-5 execs for round table · 1:1 invites go to next tier</div>
+        <div class="tl-week"><div class="wk">W10</div><div class="wk-tag">BOFU Recruit</div>WD6/WD7 live (round table) · WD4/WD5 1:1 active · pre-work to all bookings</div>
+        <div class="tl-week hinge"><div class="wk">W11</div><div class="wk-tag">Round Table + 1:1</div><b>Round Table held (top-5)</b> · <b>1:1 Diagnostic Workshops held (next tier)</b></div>
+        <div class="tl-week hinge2"><div class="wk">W12</div><div class="wk-tag">Classify</div><b>Classify</b> · Round-table + 1:1 attendees → High-Intent · No-shows → Nurture</div>
       </div>
-      <div class="flow-arrow">↓</div>
- 
-      <div class="flow-row r3">
-        <div class="flow-node">
-          <div class="fn-t">2a · Email outreach</div>
-          <div class="fn-d">Named-sender sequence. CL1 in-line, CL2 linked.</div>
-          <div class="fn-a">CL1 · CL2 · WD1</div>
-        </div>
-        <div class="flow-node">
-          <div class="fn-t">2b · LinkedIn (Organic + Paid)</div>
-          <div class="fn-d">Exec org posts + matched-audience paid to TAL.</div>
-          <div class="fn-a">CL1 · CL3 snippet · WD1</div>
-        </div>
-        <div class="flow-node">
-          <div class="fn-t">2c · Tele / ISR</div>
-          <div class="fn-d">1st-pass dials warming + signal qualification.</div>
-          <div class="fn-a">TE1 script · SE5 Ready Reckoner</div>
-        </div>
+      <div class="legend">
+        <span><span class="sw" style="background:var(--purple-shade);border:1px solid var(--purple);"></span>TL pre-launch (W1-W4)</span>
+        <span><span class="sw" style="background:#D7E7FB;border:1px solid var(--blue);"></span>Hinge — Webinar (W8) &amp; BOFU (W11)</span>
+        <span><span class="sw" style="background:#D6EDD4;border:1px solid var(--green);"></span>Classification (W12)</span>
       </div>
-      <div class="flow-arrow">↓</div>
- 
-      <div class="flow-row r1">
-        <div class="flow-node">
-          <div class="fn-t">3 · Core assets + CTA → Interest captured</div>
-          <div class="fn-d">Engagement on CL1/CL2/WD1 tagged as interest in CRM. SDR/ISR qualifies + routes.</div>
-          <div class="fn-a">CL1 · CL2 · WD1 · SE5</div>
-        </div>
-      </div>
-      <div class="flow-arrow">↓</div>
- 
-      <div class="flow-row r1">
-        <div class="flow-node">
-          <div class="fn-t">4 · More core assets → Webinar invitation</div>
-          <div class="fn-d">Interest list gets WD2 outline preview + CL3 proof snippet. Tele pushes registrations.</div>
-          <div class="fn-a">WD2 · WD3 · CL3 · TE1 · Email T-series</div>
-        </div>
-      </div>
-      <div class="flow-arrow">↓</div>
- 
-      <div class="flow-row r1">
-        <div class="flow-node hinge">
-          <div class="fn-t">5 · WEBINAR — Hinge 1 (Week 4)</div>
-          <div class="fn-d">Live session with demo where applicable. Dual narrative: business + technical. Q&amp;A surface hand-raisers.</div>
-          <div class="fn-a">WD3 LP · SE1 + SE2 themes · demo assets</div>
-        </div>
-      </div>
- 
-      <div class="flow-merge">Post-webinar branch</div>
-      <div class="flow-branch-row">
-        <div class="flow-branch-label l">Attended</div>
-        <div class="flow-branch-label r">Registered, no-show</div>
-        <div class="flow-node branch-yes" style="margin-top:10px;">
-          <div class="fn-t">6a · Success stories follow-through</div>
-          <div class="fn-d">CL4-CL6 bundle delivered within 24h. Workshop invite + tele follow-up.</div>
-          <div class="fn-a">CL4 · CL5 · CL6 · SE1/SE2 · WD4 teaser</div>
-        </div>
-        <div class="flow-node branch-no" style="margin-top:10px;">
-          <div class="fn-t">6b · Replay + re-engagement drip</div>
-          <div class="fn-d">Email drip with replay + CL3 snippet. Still eligible for workshop if hand-raise.</div>
-          <div class="fn-a">Replay link · CL3 · drip sequence</div>
-        </div>
-      </div>
-      <div class="flow-arrow">↓</div>
- 
-      <div class="flow-row r1">
-        <div class="flow-node">
-          <div class="fn-t">7 · Workshop invitation + tele recruitment</div>
-          <div class="fn-d">WD4 outline + WD5 booking page. TE2 dials prioritize attendees first, no-shows with signals second.</div>
-          <div class="fn-a">WD4 · WD5 · TE2 · SE3 battle cards (ready)</div>
-        </div>
-      </div>
-      <div class="flow-arrow">↓</div>
- 
-      <div class="flow-row r1">
-        <div class="flow-node hinge2">
-          <div class="fn-t">8 · DIAGNOSTIC WORKSHOP — Hinge 2 (Week 7)</div>
-          <div class="fn-d">1:1 facilitated session. Output: scorecard + remediation roadmap. SE decks + SE4 objection guide support the room.</div>
-          <div class="fn-a">WD4 facilitation · SE1/SE2 · SE3 · SE4</div>
-        </div>
-      </div>
- 
-      <div class="flow-merge">Workshop branch — the classification hinge</div>
-      <div class="flow-branch-row">
-        <div class="flow-branch-label l">Attended</div>
-        <div class="flow-branch-label r">Registered, no-show</div>
-        <div class="flow-node terminal-hi" style="margin-top:10px;">
-          <div class="fn-t">9a · HIGH-INTENT ACCOUNT</div>
-          <div class="fn-d">Handoff to AE with workshop scorecard + SE decks. Opportunity record created. Pursuit motion begins.</div>
-          <div class="fn-a">Output: Pursuit list · SE1/SE2 follow-up deck · scorecard</div>
-        </div>
-        <div class="flow-node terminal-nu" style="margin-top:10px;">
-          <div class="fn-t">9b · NURTURE ACCOUNT / PROSPECT</div>
-          <div class="fn-d">Re-book attempt (10 bus days). If declined, drop to long-cycle nurture drip. Re-enter on new signals.</div>
-          <div class="fn-a">Output: Nurture list · drip sequence · signal watch</div>
-        </div>
-      </div>
- 
     </div>
   </div>
 </div>
- 
-<!-- ============ ASSET INVENTORY ============ -->
-<div class="panel" id="assets">
+
+<!-- ============ ASSET LIBRARY ============ -->
+<div class="panel" id="library">
   <div class="card" style="margin-bottom:14px;">
-    <h2>Asset Inventory — 18 Items Across 4 Families</h2>
-    <p class="lead">Grouped by production family (Collaterals · Sales Enablement · Web Documents · Promotional). Funnel stage chip (TOFU / MOFU / BOFU) on each card. Owner + format shown on placeholder until finished creative drops in.</p>
-    <div class="tr-toggle" style="margin-bottom:0;">
-      <button class="active" data-afilter="all">All (18)</button>
+    <h2>Content &amp; Asset Library — <span class="ln-only">24 items (Lean)</span><span class="rh-only">31 items (Rich)</span></h2>
+    <p class="lead">Grouped by production family. Funnel stage chip (TOFU / MOFU / BOFU / TL) on each card. Owner + format on the placeholder until finished creative drops in. Filter by funnel stage below.</p>
+    <div class="jr-toggle" style="margin-bottom:0;">
+      <button class="active" data-afilter="all">All</button>
+      <button data-afilter="tl" class="rh-only" style="display:none;">TL</button>
       <button data-afilter="tofu">TOFU</button>
       <button data-afilter="mofu">MOFU</button>
       <button data-afilter="bofu">BOFU</button>
     </div>
   </div>
- 
+
   <div class="card">
-    <div class="group-hd">Collaterals <span class="count">6</span> <span class="desc">Core offering + proof assets</span></div>
+    <div class="group-hd rich-grp rh-only" style="display:none;">Thought Leadership Layer <span class="count">4</span> <span class="desc">Hero + 3 promos · 4-week pre-launch</span></div>
+    <div class="cg-grid rh-only" id="gridTL" style="display:none;"></div>
+
+    <div class="group-hd">Collaterals <span class="count">8</span> <span class="desc">Core offering assets + 3× success story 1-slides + 3× 2pp success stories</span></div>
     <div class="cg-grid" id="gridCollaterals"></div>
- 
-    <div class="group-hd">Sales Enablement <span class="count">5</span> <span class="desc">Seller-facing kit — decks, battle cards, pitch guide, ready reckoner</span></div>
+
+    <div class="group-hd">Sales Enablement <span class="count">5</span> <span class="desc">Decks · battle cards · pitch guide · ready reckoner</span></div>
     <div class="cg-grid" id="gridSales"></div>
- 
-    <div class="group-hd">Web Documents <span class="count">5</span> <span class="desc">Landing pages + webinar/workshop outlines for TA recruitment</span></div>
+
+    <div class="group-hd">Web Documents <span class="ln-only count">5</span><span class="rh-only count">7</span> <span class="desc">Landing pages + outlines for offerings, webinar, workshop<span class="rh-only"> &amp; round table</span></span></div>
     <div class="cg-grid" id="gridWeb"></div>
- 
-    <div class="group-hd">Promotional — Campaign Design <span class="count">Channel sets</span> <span class="desc">Email · LinkedIn (Organic + Paid) · Website</span></div>
+
+    <div class="group-hd">Promotional <span class="count">4</span> <span class="desc">Channel sets — Email · LI Organic · LI Paid · Website</span></div>
     <div class="cg-grid" id="gridPromo"></div>
+
+    <div class="group-hd">Tele / ISR <span class="ln-only count">2</span><span class="rh-only count">3</span> <span class="desc">Webinar + workshop recruitment<span class="rh-only"> + round table white-glove</span></span></div>
+    <div class="cg-grid" id="gridTele"></div>
   </div>
 </div>
- 
-<!-- ============ INTENT TRACKS ============ -->
-<div class="panel" id="tracks">
+
+<!-- ============ PROSPECT JOURNEY ============ -->
+<div class="panel" id="journey">
   <div class="card" style="margin-bottom:14px;">
-    <h2>Intent Tracks — High-Intent vs Nurture Plays</h2>
-    <p class="lead">Same campaign stages, two expressions. An account's track is not fixed until the workshop branch at W7 — until then, <b>any account can shift tracks</b> based on signal. Classification is only locked at W8.</p>
+    <h2>Prospect Journey — High-Intent vs Nurture <span class="variant-pill lean ln-only">Lean</span><span class="variant-pill rich rh-only">Rich</span></h2>
+    <p class="lead">Same campaign stages, two expressions. Track is not fixed until the BOFU branch — until then, <b>any account can shift tracks</b> based on signal.<span class="rh-only"> Rich variant adds a TL pre-launch stage and splits BOFU into round table + 1:1.</span></p>
+
     <div class="cls-grid" style="margin-bottom: 14px;">
       <div class="cls-card hi">
         <h3>High-Intent · the Pursuit list</h3>
-        <div class="cls-def">Registered for AND attended the diagnostic workshop</div>
+        <div class="cls-def ln-only">Registered for AND attended the 1:1 diagnostic workshop</div>
+        <div class="cls-def rh-only">Attended the round table OR the 1:1 diagnostic workshop</div>
         <ul>
           <li>Opportunity record created · AE owns next step</li>
-          <li>Scorecard + roadmap from workshop feeds the pursuit pitch</li>
+          <li>Scorecard + roadmap from BOFU session feeds the pursuit pitch</li>
           <li>SE1/SE2 decks deploy · SE3 battle cards stay loaded</li>
-          <li>Target: close evaluation or commercial discussion inside 60 days</li>
+          <li class="ln-only">Target: close evaluation or commercial discussion inside 60 days</li>
+          <li class="rh-only">Target: round-table attendees fast-tracked to commercial in 30-45 days; 1:1 attendees in 60 days</li>
         </ul>
       </div>
       <div class="cls-card nu">
         <h3>Nurture · the watch list</h3>
-        <div class="cls-def">Registered for workshop but did not attend (or registered for webinar only)</div>
+        <div class="cls-def ln-only">Registered for workshop but did not attend (or webinar only)</div>
+        <div class="cls-def rh-only">Engaged TL or webinar but did not attend a BOFU session</div>
         <ul>
           <li>One re-book attempt (10 bus days) · if declined → long-cycle drip</li>
           <li>Quarterly signal re-check · hand-raise re-enters the campaign</li>
           <li>SE5 ready reckoner monitors trigger events</li>
-          <li>Target: reactivate to a future mini campaign cycle</li>
+          <li>Target: reactivate to a future campaign cycle</li>
         </ul>
       </div>
     </div>
- 
-    <div class="tr-grid">
+
+    <div class="tr-grid" id="trGridLean" data-variant-only="lean">
       <div></div>
       <div class="tr-col-hd hi">High-Intent Play</div>
       <div class="tr-col-hd nu">Nurture Play</div>
- 
-      <div class="tr-row-hd">S1<br>Outreach</div>
-      <div class="tr-cell hi"><span class="t">Named-sender exec ping</span>CP/AE-signed email + LI DM referencing account-specific signal. Tele 1st-pass same week.
-        <div class="tr-channels">Channels: Email · LI org/paid · Tele</div>
-        <div class="tr-assets">Assets: CL1, SE5 signal pack</div>
-      </div>
-      <div class="tr-cell nu"><span class="t">List-wide asset drop</span>Standard email sequence + LI paid awareness. Tele reserved for signal triggers.
-        <div class="tr-channels">Channels: Email · LI paid · Website</div>
-        <div class="tr-assets">Assets: CL1, CL2, WD1</div>
-      </div>
- 
-      <div class="tr-row-hd">S2<br>Interest</div>
-      <div class="tr-cell hi"><span class="t">1:1 enrichment call</span>SDR qualification call + deep-dive on CL2 brochure. Ready Reckoner flags promoted.
-        <div class="tr-channels">Channels: Tele · Email</div>
-        <div class="tr-assets">Assets: CL2, SE5</div>
-      </div>
-      <div class="tr-cell nu"><span class="t">Self-serve content engagement</span>Web tracking on WD1 · CTA clicks captured. Re-targeted on LI.
-        <div class="tr-channels">Channels: Website · LI paid</div>
-        <div class="tr-assets">Assets: WD1, CL1</div>
-      </div>
- 
-      <div class="tr-row-hd">S3<br>Webinar</div>
-      <div class="tr-cell hi"><span class="t">Personal webinar invite + seat hold</span>Named invite + tele confirmation. Pre-event prep note from AE.
-        <div class="tr-channels">Channels: Email · Tele</div>
-        <div class="tr-assets">Assets: WD2 outline, WD3 LP, CL3 snippet</div>
-      </div>
-      <div class="tr-cell nu"><span class="t">LP-driven registration</span>WD3 LP + LI paid event ad + email blast. No 1:1 tele.
-        <div class="tr-channels">Channels: Web · LI paid · Email</div>
-        <div class="tr-assets">Assets: WD3, CL3</div>
-      </div>
- 
-      <div class="tr-row-hd">S4<br>Post-Webinar</div>
-      <div class="tr-cell hi"><span class="t">Success stories + workshop push</span>CL4-CL6 hand-delivered. Tele within 24h to book workshop.
-        <div class="tr-channels">Channels: Email · Tele</div>
-        <div class="tr-assets">Assets: CL4, CL5, CL6, WD4 teaser</div>
-      </div>
-      <div class="tr-cell nu"><span class="t">Replay + drip</span>Replay email + CL3 snippet. Workshop CTA present but not pushed.
-        <div class="tr-channels">Channels: Email · LI org</div>
-        <div class="tr-assets">Assets: Replay, CL3</div>
-      </div>
- 
-      <div class="tr-row-hd">S5<br>Workshop</div>
-      <div class="tr-cell hi"><span class="t">Diagnostic workshop delivered</span>1:1 session. Scorecard + roadmap produced. SE decks / SE3 / SE4 in the room.
-        <div class="tr-channels">Channels: Workshop · Email</div>
-        <div class="tr-assets">Assets: WD4 facilitation, SE1, SE2, SE3, SE4</div>
-      </div>
-      <div class="tr-cell nu"><span class="t">No-show recovery loop</span>TE2 re-book attempt within 10 bus days. Else → drip.
-        <div class="tr-channels">Channels: Tele · Email</div>
-        <div class="tr-assets">Assets: TE2 script, WD5</div>
-      </div>
- 
-      <div class="tr-row-hd">S6<br>Classify</div>
-      <div class="tr-cell hi" style="background:linear-gradient(135deg,#D6EDD4,#B7E0B3);border-color:var(--green);">
-        <span class="t" style="color:var(--green);">HIGH-INTENT · Pursuit handoff</span>
-        Opportunity created · AE owns · SE1/SE2 follow-up deck · target 60-day close of evaluation.
-        <div class="tr-channels">Channels: AE-owned</div>
-        <div class="tr-assets">Assets: Workshop scorecard, SE1/SE2</div>
-      </div>
-      <div class="tr-cell nu" style="background:linear-gradient(135deg,#FFF6D6,#F2E1A3);border-color:var(--amber);">
-        <span class="t" style="color:var(--amber);">NURTURE · drip re-entry</span>
-        Long-cycle drip + signal watch · quarterly re-check · re-enters next campaign on hand-raise.
-        <div class="tr-channels">Channels: Email · LI org/paid</div>
-        <div class="tr-assets">Assets: Drip sequence, CL3 quarterly refresh</div>
-      </div>
+    </div>
+
+    <div class="tr-grid" id="trGridRich" data-variant-only="rich">
+      <div></div>
+      <div class="tr-col-hd hi">High-Intent Play</div>
+      <div class="tr-col-hd nu">Nurture Play</div>
     </div>
   </div>
 </div>
- 
-<!-- ============ TELE / ISR ============ -->
-<div class="panel" id="tele">
+
+<!-- ============ CHANNEL MIX ============ -->
+<div class="panel" id="channels">
+  <div class="ch-tabs" id="chtabs">
+    <button class="active rich-only-btn rh-only" data-ch="tl" style="display:none;">Thought Leadership</button>
+    <button class="active" data-ch="email">Email</button>
+    <button data-ch="liorg">LinkedIn Organic</button>
+    <button data-ch="lipaid">LinkedIn Paid</button>
+    <button data-ch="web">Website / LPs</button>
+    <button data-ch="webinar">Webinar</button>
+    <button data-ch="workshop">Workshop</button>
+    <button class="rich-only-btn rh-only" data-ch="roundtable" style="display:none;">Round Table</button>
+    <button data-ch="tele">Tele / ISR</button>
+  </div>
+
+  <div class="ch-panel rh-only" id="ch-tl" style="display:none;">
+    <div class="card" style="margin-bottom:12px;">
+      <h3>Role <span class="variant-pill rich">Rich-only</span></h3>
+      <p style="font-size:12.5px; margin:0;">4-week pre-launch layer. Hero asset (analyst-validated research) is gated; 3 promotional assets amplify across LI organic + paid. Engagement signals from this layer feed the W5+ outreach targeting refinement.</p>
+    </div>
+    <div class="row g2" id="ch-tl-grid"></div>
+  </div>
+
+  <div class="ch-panel active" id="ch-email">
+    <div class="card" style="margin-bottom:12px;">
+      <h3>Role</h3>
+      <p style="font-size:12.5px; margin:0;">Primary nurture and exec re-engagement channel. Short, named-sender, single-CTA. <span class="rh-only">Rich variant adds TL gated download nurture sequences in W2-W4.</span></p>
+    </div>
+    <div class="row g2" id="ch-email-grid"></div>
+  </div>
+
+  <div class="ch-panel" id="ch-liorg">
+    <div class="card" style="margin-bottom:12px;">
+      <h3>Role</h3>
+      <p style="font-size:12.5px; margin:0;">Executive + company posting cadence. <span class="ln-only">3/week for 8 weeks.</span><span class="rh-only">3/week for 12 weeks (TL articles W1-W4 are the highest-priority posts).</span></p>
+    </div>
+    <div class="row g2" id="ch-liorg-grid"></div>
+  </div>
+
+  <div class="ch-panel" id="ch-lipaid">
+    <div class="card" style="margin-bottom:12px;">
+      <h3>Role</h3>
+      <p style="font-size:12.5px; margin:0;">ABM matched-audience targeting. <span class="ln-only">Awareness + webinar event ads + retargeting.</span><span class="rh-only">TL hero amplification (W1-W4), then standard awareness/event/retargeting.</span></p>
+    </div>
+    <div class="row g2" id="ch-lipaid-grid"></div>
+  </div>
+
+  <div class="ch-panel" id="ch-web">
+    <div class="card" style="margin-bottom:12px;">
+      <h3>Role</h3>
+      <p style="font-size:12.5px; margin:0;">Landing pages carry CTA capture. <span class="ln-only">5 LPs (offering, webinar outline, webinar reg, workshop outline, workshop reg).</span><span class="rh-only">7 LPs (above + round table outline + round table reg) plus the gated TL hero LP.</span></p>
+    </div>
+    <div class="row g2" id="ch-web-grid"></div>
+  </div>
+
+  <div class="ch-panel" id="ch-webinar">
+    <div class="card" style="margin-bottom:12px;">
+      <h3>Role</h3>
+      <p style="font-size:12.5px; margin:0;"><span class="ln-only">Single live session at W4 with demo (where applicable). Practitioner + business dual narrative.</span><span class="rh-only">Single live session at W8. Audience: 200+ practitioners pulled from 50-80 TAL accounts (avg 3-4 practitioners/account). Hero demo + interactive Q&amp;A.</span></p>
+    </div>
+    <div class="row g2" id="ch-webinar-grid"></div>
+  </div>
+
+  <div class="ch-panel" id="ch-workshop">
+    <div class="card" style="margin-bottom:12px;">
+      <h3>Role</h3>
+      <p style="font-size:12.5px; margin:0;"><span class="ln-only">BOFU conversion. 90-min 1:1 SA + CP facilitation. Output: scorecard + roadmap.</span><span class="rh-only">BOFU conversion for the next-tier accounts (those not invited to round table). Same 90-min 1:1 SA + CP format. Round table covered separately.</span></p>
+    </div>
+    <div class="row g2" id="ch-workshop-grid"></div>
+  </div>
+
+  <div class="ch-panel rh-only" id="ch-roundtable" style="display:none;">
+    <div class="card" style="margin-bottom:12px;">
+      <h3>Role <span class="variant-pill rich">Rich-only</span></h3>
+      <p style="font-size:12.5px; margin:0;">Top-5 priority execs · 90-min facilitated round table at W11 · expectation is fast-tracked. Format: peer benchmark + facilitated discussion + same-day commercial follow-up. Lead facilitator = practice lead + analyst (where present at TL launch).</p>
+    </div>
+    <div class="row g2" id="ch-roundtable-grid"></div>
+  </div>
+
+  <div class="ch-panel" id="ch-tele">
+    <div class="card" style="margin-bottom:12px;">
+      <h3>Role</h3>
+      <p style="font-size:12.5px; margin:0;"><span class="ln-only">Two motions: TE1 webinar recruitment (W2-W4) · TE2 workshop recruitment (W5-W7). ~240 dials over 8 wk.</span><span class="rh-only">Three motions: TE1 webinar recruitment (W6-W8) · TE2 1:1 workshop recruitment (W9-W11) · TE3 white-glove round-table dials to top-5 execs (W9-W10). ~360 dials over 12 wk.</span></p>
+    </div>
+    <div class="row g2" id="ch-tele-grid"></div>
+  </div>
+</div>
+
+<!-- ============ FAST-PATH ============ -->
+<div class="panel" id="fastpath">
   <div class="card" style="margin-bottom:14px;">
-    <h2>Tele / ISR Plays</h2>
-    <p class="lead">The ISR / tele-calling team runs two dedicated recruitment motions: webinar (W2-W4) and workshop (W5-W7). Scripts anchor to SE5 Ready Reckoner (signals + responses) and hand off to AE+SA for High-Intent outcomes.</p>
- 
-    <div class="tele-wrap">
-      <div class="tele-card webinar">
-        <h3>TE1 · Webinar Recruitment</h3>
-        <div class="tele-sub">Timing: W2-W3 (first-pass warm) · W4 (confirm seats, day-of reminder) · Scripts aligned to Business or Technical stakeholder</div>
-        <div class="tele-step"><div class="tele-num">1</div><div><span class="tele-b">Open.</span> Reference account-specific signal from SE5 Ready Reckoner. Tie to 1-2 sentence offering hook (CL1).</div></div>
-        <div class="tele-step"><div class="tele-num">2</div><div><span class="tele-b">Qualify.</span> Current-state question → confirm role fit (biz vs tech). 30-60s discovery max.</div></div>
-        <div class="tele-step"><div class="tele-num">3</div><div><span class="tele-b">Pitch webinar.</span> Position the W4 session as the shortest path to see the offering + demo in context. Send WD3 LP during call.</div></div>
-        <div class="tele-step"><div class="tele-num">4</div><div><span class="tele-b">Handle objection.</span> Pull from SE4 Pitch &amp; Objection Handling Guide — top 5 reusable answers.</div></div>
-        <div class="tele-step"><div class="tele-num">5</div><div><span class="tele-b">Confirm.</span> Book seat. Send CL3 success story snippet as teaser. Log signal flags in CRM.</div></div>
-        <div class="tele-step"><div class="tele-num">6</div><div><span class="tele-b">Day-of reminder.</span> Morning-of tele nudge to Tier-1 registrants. Auto-reminder email covers the rest.</div></div>
-      </div>
- 
-      <div class="tele-card workshop">
-        <h3>TE2 · Workshop Recruitment</h3>
-        <div class="tele-sub">Timing: W5-W6 (attendees first, then bookings ramp) · W7 (day-of + recover no-shows) · Output feeds W8 classification</div>
-        <div class="tele-step"><div class="tele-num">1</div><div><span class="tele-b">Prioritize.</span> Attended webinar + tagged as Business/Technical champion = first dials. Registered-but-no-show second. Unknown signal third.</div></div>
-        <div class="tele-step"><div class="tele-num">2</div><div><span class="tele-b">Position.</span> Diagnostic workshop as a "2-hour, scorecard-out" 1:1 session with SA. Anchor to WD4 outline.</div></div>
-        <div class="tele-step"><div class="tele-num">3</div><div><span class="tele-b">Book.</span> Send WD5 booking LP during the call. Confirm pre-work questionnaire.</div></div>
-        <div class="tele-step"><div class="tele-num">4</div><div><span class="tele-b">Handoff.</span> AE + SA notified on booking. Opportunity created at booking (not after workshop).</div></div>
-        <div class="tele-step"><div class="tele-num">5</div><div><span class="tele-b">Recover no-show.</span> 24h post-miss call. Re-book within 10 bus days. If declined → flag Nurture.</div></div>
-        <div class="tele-step"><div class="tele-num">6</div><div><span class="tele-b">Classify.</span> At W8, feed final disposition (attended / no-show / declined) into reporting for High-Intent vs Nurture labeling.</div></div>
-      </div>
+    <h2>Hand-Raiser Triggers — Click any to see routing</h2>
+    <p class="lead">Each trigger routes through SDR Fast-Path Triage. Lane A = Webinar · Lane B = 1:1 Workshop<span class="rh-only"> · Lane C = Round Table (rich-variant only)</span>. Unqualified inbounds route to Nurture.</p>
+    <div class="trigger-grid" id="triggers"></div>
+  </div>
+
+  <div class="detail-panel" id="triggerdetail">
+    <h3>Select a trigger above</h3>
+    <p style="font-size:12.5px; color:var(--muted);">Each trigger routes through SDR Fast-Path Triage. Click a card to see the routing path and SLA.</p>
+  </div>
+
+  <div class="card" style="margin-bottom:14px;">
+    <h2>SLA Ladder</h2>
+    <div class="sla-ladder">
+      <div class="sla-step"><div class="sla-t">1 · Auto-ack</div><div class="sla-v">&lt;= 5 minutes (automated)</div></div>
+      <div class="sla-step"><div class="sla-t">2 · First human response</div><div class="sla-v">&lt;= 4 business hours (SDR)</div></div>
+      <div class="sla-step"><div class="sla-t">3 · Calendar hold / invite</div><div class="sla-v">&lt;= 24 hours</div></div>
+      <div class="sla-step"><div class="sla-t">4a · Webinar VIP seat</div><div class="sla-v">&lt;= 24 hours (Lane A)</div></div>
+      <div class="sla-step"><div class="sla-t">4b · 1:1 Workshop booked</div><div class="sla-v">&lt;= 5 business days (Lane B)</div></div>
+      <div class="sla-step rh-only"><div class="sla-t">4c · Round Table seat</div><div class="sla-v">&lt;= 24 hours (Lane C, rich-only)</div></div>
     </div>
- 
-    <div style="margin-top:16px;">
-      <div class="card">
-        <h3>Tele Capacity + Guardrails</h3>
-        <div class="row g3" style="margin-top:6px;">
-          <div class="play-card">
-            <div class="pc-title">Dial coverage</div>
-            <div class="pc-meta">
-              <span>Accounts:</span><span><b>~50</b></span>
-              <span>Touches/account:</span><span><b>3-5</b></span>
-              <span>Effort:</span><span>~240 dials total over 8 wk</span>
-              <span>Team:</span><span>1-2 ISRs shared</span>
-            </div>
-          </div>
-          <div class="play-card">
-            <div class="pc-title">SLA to hand-raise</div>
-            <div class="pc-meta">
-              <span>Auto-ack:</span><span><b>&lt;= 5 min</b></span>
-              <span>First dial:</span><span><b>&lt;= 4 bus hrs</b></span>
-              <span>AE/SA loop:</span><span><b>&lt;= 24 hrs</b></span>
-              <span>Workshop book:</span><span>&lt;= 5 bus days</span>
-            </div>
-          </div>
-          <div class="play-card">
-            <div class="pc-title">Guardrails</div>
-            <div class="pc-meta">
-              <span>Opp-first:</span><span>Opportunity at workshop booking</span>
-              <span>Cadence cap:</span><span>Max 2 dial attempts/wk/account</span>
-              <span>Escalation:</span><span>Tier-1 hand-raise → same-day AE</span>
-              <span>Review:</span><span>Weekly triage with RevOps</span>
-            </div>
-          </div>
-        </div>
-      </div>
+  </div>
+
+  <div class="card">
+    <h2>Guardrails</h2>
+    <div class="guardrails">
+      <div class="guard"><b>Capacity cap</b> — 1:1 workshop capped at 8 active sessions/month per SA-CP pair.<span class="rh-only"> Round table capped at 5 seats; waitlist promotes via signal score.</span></div>
+      <div class="guard"><b>Opportunity-first</b> — Opportunity record created at triage, not after the workshop.</div>
+      <div class="guard"><b>Weekly triage review</b> — RevOps + Marketing review dispositions weekly to prevent leakage.</div>
+      <div class="guard"><b>Escalation path</b> — Any hand-raise from a named Tier-1 account → same-day SA review.</div>
+      <div class="guard"><b>Reporting re-entry</b> — Fast-path outcomes re-join the main funnel at the matching stage with source tagged.</div>
+      <div class="guard"><b>Content inheritance</b> — Fast-path invitees still receive the proof bundle + prep kit.</div>
     </div>
   </div>
 </div>
- 
-<!-- ============ PREDICT ============ -->
+
+<!-- ============ OUTCOME PREDICTION ============ -->
 <div class="panel" id="predict">
   <div class="card">
-    <h2>Live Funnel Predictor — Move the sliders</h2>
-    <p class="lead">The predictor models the 8-week mini campaign end-to-end. Defaults are mid-point assumptions for a ~50-account template. Outputs: workshops held, High-Intent count, Nurture count, and qualified pipeline (TCV).</p>
- 
+    <h2>Outcome Prediction — Live Funnel <span class="variant-pill lean ln-only">Lean</span><span class="variant-pill rich rh-only">Rich</span></h2>
+    <p class="lead"><span class="ln-only">Models the 8-week mini campaign end-to-end. Defaults are mid-point assumptions for ~50 accounts.</span><span class="rh-only">Models the 12-week rich campaign end-to-end including TL pre-launch, 200+ practitioner webinar, and split BOFU (top-5 round table + next-tier 1:1).</span> Outputs: workshops held, High-Intent count, Nurture count, qualified pipeline (TCV).</p>
+
     <div class="predict-grid">
       <div class="sliders" id="sliders">
-        <div class="slider-row"><div><div class="lbl">Target Accounts (total)</div><div class="hint">TAL + direct prospects, merged</div></div><div class="val" id="v-tal">50</div></div>
-        <div><input type="range" id="s-tal" min="10" max="200" value="50" step="5"></div>
- 
-        <div class="slider-row"><div><div class="lbl">Outreach Engagement</div><div class="hint">Any asset view or CTA click</div></div><div class="val" id="v-eng">40%</div></div>
-        <div><input type="range" id="s-eng" min="15" max="75" value="40" step="1"></div>
- 
-        <div class="slider-row"><div><div class="lbl">Webinar Registration</div><div class="hint">Of engaged accounts</div></div><div class="val" id="v-reg">45%</div></div>
+        <div class="slider-row"><div><div class="lbl">Target Accounts</div><div class="hint">TAL + direct prospects</div></div><div class="val" id="v-tal">50</div></div>
+        <div><input type="range" id="s-tal" min="20" max="150" value="50" step="5"></div>
+
+        <div class="slider-row rh-only"><div><div class="lbl">TL Engagement Lift</div><div class="hint">Boost to Outreach Engagement from TL pre-launch</div></div><div class="val" id="v-tlift">+15%</div></div>
+        <div class="rh-only"><input type="range" id="s-tlift" min="0" max="40" value="15" step="1"></div>
+
+        <div class="slider-row"><div><div class="lbl">Outreach Engagement</div><div class="hint">% of TAL engaging with any asset</div></div><div class="val" id="v-eng">40%</div></div>
+        <div><input type="range" id="s-eng" min="15" max="80" value="40" step="1"></div>
+
+        <div class="slider-row rh-only"><div><div class="lbl">Practitioners per Engaged Account</div><div class="hint">Multiplier for webinar audience</div></div><div class="val" id="v-pra">4</div></div>
+        <div class="rh-only"><input type="range" id="s-pra" min="1" max="8" value="4" step="1"></div>
+
+        <div class="slider-row"><div><div class="lbl">Webinar Registration</div><div class="hint"><span class="ln-only">% of engaged accounts</span><span class="rh-only">% of practitioners reached</span></div></div><div class="val" id="v-reg">45%</div></div>
         <div><input type="range" id="s-reg" min="20" max="80" value="45" step="1"></div>
- 
-        <div class="slider-row"><div><div class="lbl">Webinar Attendance</div><div class="hint">Of registrants (live + near-live)</div></div><div class="val" id="v-att">55%</div></div>
+
+        <div class="slider-row"><div><div class="lbl">Webinar Attendance</div><div class="hint">% of registrants</div></div><div class="val" id="v-att">55%</div></div>
         <div><input type="range" id="s-att" min="25" max="85" value="55" step="1"></div>
- 
-        <div class="slider-row"><div><div class="lbl">Workshop Registration</div><div class="hint">Of webinar attendees + hand-raisers</div></div><div class="val" id="v-wreg">50%</div></div>
-        <div><input type="range" id="s-wreg" min="20" max="90" value="50" step="1"></div>
- 
-        <div class="slider-row"><div><div class="lbl">Workshop Attendance</div><div class="hint">Of workshop registrants</div></div><div class="val" id="v-watt">70%</div></div>
+
+        <div class="slider-row rh-only"><div><div class="lbl">Round-Table Seats Filled</div><div class="hint">Top-5 priority execs (max 5)</div></div><div class="val" id="v-rt">5</div></div>
+        <div class="rh-only"><input type="range" id="s-rt" min="0" max="5" value="5" step="1"></div>
+
+        <div class="slider-row"><div><div class="lbl">1:1 Workshop Registration</div><div class="hint"><span class="ln-only">Of webinar attendees</span><span class="rh-only">Of next-tier engaged accounts (excl. round-table)</span></div></div><div class="val" id="v-wreg">50%</div></div>
+        <div><input type="range" id="s-wreg" min="15" max="90" value="50" step="1"></div>
+
+        <div class="slider-row"><div><div class="lbl">1:1 Workshop Attendance</div><div class="hint">% of workshop registrants</div></div><div class="val" id="v-watt">70%</div></div>
         <div><input type="range" id="s-watt" min="30" max="95" value="70" step="1"></div>
- 
-        <div class="slider-row"><div><div class="lbl">Pursuit Conversion</div><div class="hint">Of workshop attendees → qualified pipeline</div></div><div class="val" id="v-pur">65%</div></div>
+
+        <div class="slider-row"><div><div class="lbl">Pursuit Conversion</div><div class="hint">% of High-Intent → qualified pipeline</div></div><div class="val" id="v-pur">65%</div></div>
         <div><input type="range" id="s-pur" min="30" max="95" value="65" step="1"></div>
- 
-        <div class="slider-row"><div><div class="lbl">Avg Deal Size (TCV)</div><div class="hint">$50K min · $50K steps · default $500K</div></div><div class="val" id="v-val">$500K</div></div>
-        <div><input type="range" id="s-val" min="50" max="2000" value="500" step="50"></div>
+
+        <div class="slider-row"><div><div class="lbl">Avg Deal Size (TCV)</div><div class="hint"><span class="ln-only">$50K min · $500K default</span><span class="rh-only">$50K min · $1M default (priority offering)</span></div></div><div class="val" id="v-val">$500K</div></div>
+        <div><input type="range" id="s-val" min="50" max="3000" value="500" step="50"></div>
       </div>
- 
+
       <div>
         <h3 style="margin-top:0;">Funnel</h3>
         <div class="pred-funnel" id="pred-funnel"></div>
- 
+
         <div class="summary-kpis">
           <div class="sk-card"><div class="sk-l">Workshops Held</div><div class="sk-v" id="sum-ws">-</div></div>
           <div class="sk-card green"><div class="sk-l">High-Intent</div><div class="sk-v" id="sum-hi">-</div></div>
           <div class="sk-card amber"><div class="sk-l">Nurture</div><div class="sk-v" id="sum-nu">-</div></div>
           <div class="sk-card green"><div class="sk-l">Pipeline TCV</div><div class="sk-v" id="sum-val">-</div></div>
         </div>
- 
+
         <div class="legend" style="margin-top:16px;">
           <span><span class="sw" style="background:var(--navy);"></span>Main funnel</span>
-          <span><span class="sw" style="background:var(--green);"></span>High-Intent (attended workshop)</span>
-          <span><span class="sw" style="background:var(--amber);"></span>Nurture (registered, no-show)</span>
+          <span><span class="sw" style="background:var(--green);"></span>High-Intent</span>
+          <span><span class="sw" style="background:var(--amber);"></span>Nurture</span>
+          <span class="rh-only"><span class="sw" style="background:var(--purple);"></span>Round Table / TL</span>
         </div>
       </div>
     </div>
   </div>
 </div>
- 
+
 </main>
- 
+
 <footer>
-  Mini Campaign Blueprint · Template · 8 weeks · ~50 target accounts · Offering-agnostic · Single-file HTML for VP review
+  Campaign in a Box · Lean (~50 TAL · 8 wk) &amp; Rich (50–80 TAL · 12 wk) variants · High-Intent + Nurture tracks · Single-file HTML for VP review
 </footer>
- 
+
 <script>
+  // ---------- VARIANT TOGGLE ----------
+  const variantBtns = document.querySelectorAll('.vt-btn');
+  function setVariant(v) {
+    document.body.dataset.variant = v;
+    variantBtns.forEach(b => b.classList.toggle('active', b.dataset.variant === v));
+    // Show/hide rich-only filter button + channel tabs
+    document.querySelectorAll('.rich-only').forEach(el => {
+      el.style.display = (v === 'rich') ? '' : 'none';
+    });
+    // Update slider defaults to variant
+    applyVariantDefaults(v);
+    refresh();
+  }
+  variantBtns.forEach(b => b.addEventListener('click', () => setVariant(b.dataset.variant)));
+
+  function applyVariantDefaults(v) {
+    if (v === 'lean') {
+      sl('s-tal').value = 50;
+      sl('s-eng').value = 40;
+      sl('s-reg').value = 45;
+      sl('s-att').value = 55;
+      sl('s-wreg').value = 50;
+      sl('s-watt').value = 70;
+      sl('s-pur').value = 65;
+      sl('s-val').value = 500;
+    } else {
+      sl('s-tal').value = 70;
+      sl('s-tlift').value = 20;
+      sl('s-eng').value = 65;     // base; TL lift adds on top → effective 85%
+      sl('s-pra').value = 5;
+      sl('s-reg').value = 70;     // % of practitioners
+      sl('s-att').value = 80;
+      sl('s-rt').value = 5;
+      sl('s-wreg').value = 45;
+      sl('s-watt').value = 75;
+      sl('s-pur').value = 75;
+      sl('s-val').value = 1000;
+    }
+  }
+
   // ---------- TABS ----------
   const tabBtns = document.querySelectorAll('#tabnav button');
   const panels = document.querySelectorAll('main .panel');
@@ -967,63 +1019,83 @@
     const t = b.dataset.tab;
     panels.forEach(p => p.classList.toggle('active', p.id === t));
   }));
- 
-  // ---------- ASSET INVENTORY ----------
+
+  // ---------- ASSET LIBRARY ----------
   const assets = {
+    tl: [
+      { id:'TL1', funnel:'tl', title:'Hero — Analyst-Validated Research / eBook', sub:'4-wk pre-launch flagship · gated', owner:'Practice Lead + Analyst', format:'24-32 pp · gated PDF + LP', variant:'rich' },
+      { id:'TL2', funnel:'tl', title:'Promo — Exec LinkedIn Article #1', sub:'Practice lead byline', owner:'Practice Lead', format:'~1200 words · LI + LP', variant:'rich' },
+      { id:'TL3', funnel:'tl', title:'Promo — Exec LinkedIn Article #2', sub:'Industry SME byline', owner:'Industry SME', format:'~1200 words · LI + LP', variant:'rich' },
+      { id:'TL4', funnel:'tl', title:'Promo — Short Video / Podcast Clip', sub:'2-3 min exec POV', owner:'Brand + Practice', format:'2-3 min video', variant:'rich' },
+    ],
     collaterals: [
-      { id:'CL1', funnel:'tofu', title:'Offering 1-Slide', sub:'Anchor opener \u00b7 paste in any email/post/DM', owner:'Product Marketing', format:'1 slide \u00b7 PDF + PNG' },
-      { id:'CL2', funnel:'tofu', title:'Offering Brochure', sub:'Leave-behind / send-ahead', owner:'Marketing', format:'4-6 pp \u00b7 PDF + print' },
-      { id:'CL3', funnel:'mofu', title:'Customer Success Story \u2014 1-Slide', sub:'Social proof snippet for pre/post-event', owner:'Industry Lead', format:'1 slide \u00b7 PDF + PNG' },
-      { id:'CL4', funnel:'mofu', title:'Customer Success Story A (2pp)', sub:'Depth proof #1', owner:'Industry Lead', format:'2 pp \u00b7 PDF + web' },
-      { id:'CL5', funnel:'mofu', title:'Customer Success Story B (2pp)', sub:'Depth proof #2', owner:'Industry Lead', format:'2 pp \u00b7 PDF + web' },
-      { id:'CL6', funnel:'mofu', title:'Customer Success Story C (2pp)', sub:'Depth proof #3', owner:'Industry Lead', format:'2 pp \u00b7 PDF + web' },
+      { id:'CL1', funnel:'tofu', title:'Offering 1-Slide', sub:'Anchor opener · paste in any email/post/DM', owner:'Product Marketing', format:'1 slide · PDF + PNG' },
+      { id:'CL2', funnel:'tofu', title:'Offering Brochure', sub:'Leave-behind / send-ahead', owner:'Marketing', format:'4-6 pp · PDF + print' },
+      { id:'CL3a', funnel:'mofu', title:'Customer Success Story 1-Slide #1', sub:'Industry A · social proof snippet', owner:'Industry Lead A', format:'1 slide · PDF + PNG' },
+      { id:'CL3b', funnel:'mofu', title:'Customer Success Story 1-Slide #2', sub:'Industry B · social proof snippet', owner:'Industry Lead B', format:'1 slide · PDF + PNG' },
+      { id:'CL3c', funnel:'mofu', title:'Customer Success Story 1-Slide #3', sub:'Industry C · social proof snippet', owner:'Industry Lead C', format:'1 slide · PDF + PNG' },
+      { id:'CL4', funnel:'mofu', title:'Customer Success Story (2pp) #1', sub:'Depth proof · Industry A', owner:'Industry Lead A', format:'2 pp · PDF + web' },
+      { id:'CL5', funnel:'mofu', title:'Customer Success Story (2pp) #2', sub:'Depth proof · Industry B', owner:'Industry Lead B', format:'2 pp · PDF + web' },
+      { id:'CL6', funnel:'mofu', title:'Customer Success Story (2pp) #3', sub:'Depth proof · Industry C', owner:'Industry Lead C', format:'2 pp · PDF + web' },
     ],
     sales: [
       { id:'SE1', funnel:'mofu', title:'Business Stakeholder Deck', sub:'For CXO / CIO / line-of-business buyer', owner:'AE Enablement', format:'12-14 slides' },
       { id:'SE2', funnel:'mofu', title:'Technical Stakeholder Deck', sub:'For VP Eng / Architect / Head of Data', owner:'SA Enablement', format:'14-16 slides' },
-      { id:'SE3', funnel:'mofu', title:'Battle Cards \u2014 us vs Market Alternatives', sub:'Quick-reference competitive kit', owner:'Competitive Intel', format:'Front / back \u00b7 per alt' },
+      { id:'SE3', funnel:'mofu', title:'Battle Cards — us vs Market Alternatives', sub:'Quick-reference competitive kit', owner:'Competitive Intel', format:'Front / back · per alt' },
       { id:'SE4', funnel:'mofu', title:'Pitch &amp; Objection Handling Guide', sub:'Top objections + reusable answers', owner:'Sales Enablement', format:'2-3 pp' },
-      { id:'SE5', funnel:'tofu', title:'Targeting / Buying Signals / Responses Ready Reckoner', sub:'ISR + AE signal playbook', owner:'RevOps + Marketing', format:'Matrix \u00b7 1-2 pp' },
+      { id:'SE5', funnel:'tofu', title:'Targeting / Buying Signals Ready Reckoner', sub:'ISR + AE signal playbook', owner:'RevOps + Marketing', format:'Matrix · 1-2 pp' },
     ],
     web: [
-      { id:'WD1', funnel:'tofu', title:'Offering Landing Page', sub:'Central hub for interest capture', owner:'Web \u00b7 Marketing', format:'Single LP' },
-      { id:'WD2', funnel:'mofu', title:'Webinar Outline', sub:'Agenda \u00b7 speakers \u00b7 demo plan', owner:'Campaign PM', format:'1 pp' },
-      { id:'WD3', funnel:'mofu', title:'Webinar LP (TA Recruitment)', sub:'Registration capture', owner:'Web \u00b7 Marketing', format:'Single LP' },
-      { id:'WD4', funnel:'bofu', title:'Diagnostic Workshop Outline', sub:'Facilitation + pre-work', owner:'SA Lead', format:'2 pp' },
-      { id:'WD5', funnel:'bofu', title:'Workshop LP (TA Recruitment)', sub:'Booking calendar + confirm', owner:'Web \u00b7 Marketing', format:'Single LP' },
+      { id:'WD1', funnel:'tofu', title:'Offering Landing Page', sub:'Central hub for interest capture', owner:'Web · Marketing', format:'Single LP' },
+      { id:'WD2', funnel:'mofu', title:'Webinar Outline', sub:'Agenda · speakers · demo plan', owner:'Campaign PM', format:'1 pp' },
+      { id:'WD3', funnel:'mofu', title:'Webinar LP (TA Recruitment)', sub:'Registration capture', owner:'Web · Marketing', format:'Single LP' },
+      { id:'WD4', funnel:'bofu', title:'1:1 Diagnostic Workshop Outline', sub:'Facilitation + pre-work', owner:'SA Lead', format:'2 pp' },
+      { id:'WD5', funnel:'bofu', title:'1:1 Workshop LP (TA Recruitment)', sub:'Booking calendar + confirm', owner:'Web · Marketing', format:'Single LP' },
+      { id:'WD6', funnel:'bofu', title:'Round Table Outline', sub:'Top-5 exec round table format · facilitator script', owner:'Practice Lead + SA', format:'2-3 pp', variant:'rich' },
+      { id:'WD7', funnel:'bofu', title:'Round Table LP (Exec Recruitment)', sub:'Invite-only LP · curated peers list', owner:'Web · Marketing', format:'Single LP', variant:'rich' },
     ],
     promo: [
-      { id:'PR1', funnel:'tofu', title:'Email Plays', sub:'Outreach T1-T3 \u00b7 nurture drip \u00b7 post-event recovery', owner:'Email Marketing', format:'~10 sends over 8 wk' },
-      { id:'PR2', funnel:'tofu', title:'LinkedIn Organic', sub:'Exec + company posts anchored to CL1/CL3', owner:'Social \u00b7 Practice Lead', format:'3/week for 8 wk' },
-      { id:'PR3', funnel:'tofu', title:'LinkedIn Paid (ABM matched)', sub:'Awareness \u2192 webinar \u2192 retargeting', owner:'Paid Media', format:'3-4 ads, rolling' },
-      { id:'PR4', funnel:'tofu', title:'Website Promotions', sub:'Hero banner / modal / embed on WD1-WD5', owner:'Web Marketing', format:'Varies by page' },
+      { id:'PR1', funnel:'tofu', title:'Email Plays', sub:'Outreach · nurture drip · post-event recovery', owner:'Email Marketing', format:'Series across full timeline' },
+      { id:'PR2', funnel:'tofu', title:'LinkedIn Organic', sub:'Exec + company posts anchored to CL1/CL3', owner:'Social · Practice Lead', format:'3/week across timeline' },
+      { id:'PR3', funnel:'tofu', title:'LinkedIn Paid (ABM matched)', sub:'Awareness → webinar → retargeting', owner:'Paid Media', format:'4-6 ads, rolling' },
+      { id:'PR4', funnel:'tofu', title:'Website Promotions', sub:'Hero banner / modal / embed across LPs', owner:'Web Marketing', format:'Varies by page' },
+    ],
+    tele: [
+      { id:'TE1', funnel:'mofu', title:'Webinar Recruitment Calls', sub:'Practitioner outreach + Tier-1 confirm', owner:'ISR Team', format:'~120 dials' },
+      { id:'TE2', funnel:'bofu', title:'1:1 Workshop Recruitment', sub:'Attendees first · then no-show recovery', owner:'ISR + AE', format:'~120 dials' },
+      { id:'TE3', funnel:'bofu', title:'Round Table White-Glove Calls', sub:'Top-5 exec personal invitations', owner:'Practice Lead + AE', format:'~30 dials · CXO-level', variant:'rich' },
     ],
   };
- 
+
+  function typeChipLabel(c){
+    return { tl:'TL', coll:'Collateral', sale:'Sales Enablement', web:'Web Doc', promo:'Promo', tele:'Tele/ISR' }[c] || c;
+  }
   function renderAssetCard(a, typeChip) {
-    return `<div class="cg-card" data-f="${a.funnel}">
+    const richTag = a.variant === 'rich' ? `<span class="chip rich">Rich-only</span>` : '';
+    const dataAttr = a.variant === 'rich' ? `data-variant="rich"` : '';
+    const funnelLabel = a.funnel === 'tl' ? 'TL' : a.funnel.toUpperCase();
+    return `<div class="cg-card" data-f="${a.funnel}" ${dataAttr}>
       <div class="cg-hd">
-        <span class="chip ${a.funnel}">${a.funnel.toUpperCase()}</span>
+        <span class="chip ${a.funnel}">${funnelLabel}</span>
         <span class="chip ${typeChip}">${typeChipLabel(typeChip)}</span>
+        ${richTag}
       </div>
-      <div class="cg-title">${a.id} \u00b7 ${a.title}</div>
+      <div class="cg-title">${a.id} · ${a.title}</div>
       <div class="cg-gist">${a.sub}</div>
       <div class="placeholder">
-        <div class="ph-icon">\u25C7</div>
+        <div class="ph-icon">◇</div>
         <div class="ph-label">Finished preview</div>
-        <div class="ph-sub">Owner: ${a.owner} \u00b7 ${a.format}</div>
+        <div class="ph-sub">Owner: ${a.owner} · ${a.format}</div>
       </div>
     </div>`;
   }
-  function typeChipLabel(c){
-    return { coll:'Collateral', sale:'Sales Enablement', web:'Web Doc', promo:'Promo', tele:'Tele/ISR' }[c] || c;
-  }
- 
+  document.getElementById('gridTL').innerHTML          = assets.tl.map(a => renderAssetCard(a, 'tl')).join('');
   document.getElementById('gridCollaterals').innerHTML = assets.collaterals.map(a => renderAssetCard(a, 'coll')).join('');
   document.getElementById('gridSales').innerHTML       = assets.sales.map(a => renderAssetCard(a, 'sale')).join('');
   document.getElementById('gridWeb').innerHTML         = assets.web.map(a => renderAssetCard(a, 'web')).join('');
   document.getElementById('gridPromo').innerHTML       = assets.promo.map(a => renderAssetCard(a, 'promo')).join('');
- 
+  document.getElementById('gridTele').innerHTML        = assets.tele.map(a => renderAssetCard(a, 'tele')).join('');
+
   document.querySelectorAll('[data-afilter]').forEach(b => {
     b.addEventListener('click', () => {
       document.querySelectorAll('[data-afilter]').forEach(x => x.classList.remove('active'));
@@ -1034,11 +1106,212 @@
       });
     });
   });
- 
-  // ---------- PREDICT ----------
+
+  // ---------- PROSPECT JOURNEY ----------
+  const journeyLean = [
+    { stage:'S1<br>Outreach',
+      hi:{ t:'Named-sender exec ping', d:'CP/AE-signed email + LI DM referencing account-specific signal. Tele 1st-pass same week.', ch:'Email · LI · Tele', a:'CL1, SE5'},
+      nu:{ t:'List-wide asset drop', d:'Standard email sequence + LI paid awareness. Tele reserved for triggers.', ch:'Email · LI paid · Web', a:'CL1, CL2, WD1'} },
+    { stage:'S2<br>Interest',
+      hi:{ t:'1:1 enrichment call', d:'SDR qualification call + deep-dive on CL2. Ready Reckoner flags promoted.', ch:'Tele · Email', a:'CL2, SE5'},
+      nu:{ t:'Self-serve content engagement', d:'Web tracking on WD1 · CTA clicks captured. Re-targeted on LI.', ch:'Web · LI paid', a:'WD1, CL1'} },
+    { stage:'S3<br>Webinar',
+      hi:{ t:'Personal webinar invite + seat hold', d:'Named invite + tele confirmation. Pre-event prep note from AE.', ch:'Email · Tele', a:'WD2, WD3, CL3a-c'},
+      nu:{ t:'LP-driven registration', d:'WD3 LP + LI paid event ad + email blast. No 1:1 tele.', ch:'Web · LI paid · Email', a:'WD3, CL3a-c'} },
+    { stage:'S4<br>Post-Webinar',
+      hi:{ t:'Success stories + workshop push', d:'CL4-CL6 hand-delivered. Tele within 24h to book workshop.', ch:'Email · Tele', a:'CL4-CL6, WD4'},
+      nu:{ t:'Replay + drip', d:'Replay email + CL3a-c snippet. Workshop CTA present but not pushed.', ch:'Email · LI org', a:'Replay, CL3a-c'} },
+    { stage:'S5<br>Workshop',
+      hi:{ t:'1:1 diagnostic delivered', d:'Scorecard + roadmap produced. SE decks / SE3 / SE4 in the room.', ch:'Workshop · Email', a:'WD4, SE1, SE2, SE3, SE4'},
+      nu:{ t:'No-show recovery loop', d:'TE2 re-book within 10 bus days. Else drop to drip.', ch:'Tele · Email', a:'TE2, WD5'} },
+    { stage:'S6<br>Classify',
+      hi:{ t:'HIGH-INTENT · Pursuit handoff', d:'Opportunity created · AE owns. SE1/SE2 follow-up. Target 60-day close of evaluation.', ch:'AE-owned', a:'Workshop scorecard, SE1/SE2', terminal:true},
+      nu:{ t:'NURTURE · drip re-entry', d:'Long-cycle drip + signal watch · quarterly re-check.', ch:'Email · LI', a:'Drip sequence, CL3 quarterly refresh', terminal:true} },
+  ];
+  const journeyRich = [
+    { stage:'S0<br>TL Pre-Launch', tlRow:true,
+      hi:{ t:'Hero hand-delivered + invite', d:'TL1 hero PDF sent direct to Tier-1 execs by practice lead. LI DM follow-up on TL2/TL3.', ch:'Email · LI org', a:'TL1, TL2, TL3'},
+      nu:{ t:'Hero amplification + gate', d:'TL hero promoted via LI paid; gated download captures contact + signal.', ch:'LI paid · Web', a:'TL1, TL4'} },
+    { stage:'S1<br>Outreach',
+      hi:{ t:'TL-signal-driven outbound', d:'TL engagement signal triggers named-sender exec ping. Tele 1st-pass references TL theme.', ch:'Email · LI · Tele', a:'CL1, SE5, TL1 ref'},
+      nu:{ t:'Standard list-wide drop', d:'Email + LI paid awareness, TL re-targeting on non-engagers.', ch:'Email · LI paid · Web', a:'CL1, CL2, WD1'} },
+    { stage:'S2<br>Interest',
+      hi:{ t:'Practitioner mapping + qual', d:'SDR identifies 3-4 practitioners per account. Confirms fit for webinar audience.', ch:'Tele · Email', a:'CL2, SE5'},
+      nu:{ t:'Self-serve engagement tracking', d:'WD1 + TL hero traffic captured. LI retargeting cycles.', ch:'Web · LI paid', a:'WD1, TL1'} },
+    { stage:'S3<br>Webinar',
+      hi:{ t:'Practitioner cohort assembly', d:'4-practitioner cohort per Tier-1 account. Personal invites from Practice Lead.', ch:'Email · Tele', a:'WD2, WD3, CL3a-c'},
+      nu:{ t:'Practitioner-targeted LP push', d:'WD3 LP optimized for practitioner titles. LI paid by job function.', ch:'Web · LI paid · Email', a:'WD3, CL3a-c'} },
+    { stage:'S4<br>Post-Webinar',
+      hi:{ t:'CL4-CL6 + round-table tease', d:'Practitioners get CL4-CL6 bundle. Their execs get a round-table preview note.', ch:'Email · Tele', a:'CL4-CL6, WD6 teaser'},
+      nu:{ t:'Replay + 1:1 invite', d:'Replay email + 1:1 workshop offer to engaged practitioners.', ch:'Email · LI org', a:'Replay, WD4'} },
+    { stage:'S5<br>BOFU<br>(RT + 1:1)',
+      hi:{ t:'Round Table (top-5) OR 1:1 (next-tier)', d:'Top-5 priority execs at Round Table (W11). Next-tier accounts at 1:1 diagnostic (W11). Both fast-tracked vs lean.', ch:'Round Table · 1:1 · Email', a:'WD6, WD4, SE1-SE4, TE3'},
+      nu:{ t:'No-show recovery (both formats)', d:'TE2 re-books 1:1 no-shows. Round-table no-shows escalate to AE personal call.', ch:'Tele · Email', a:'TE2, TE3, WD5, WD7'} },
+    { stage:'S6<br>Classify',
+      hi:{ t:'HIGH-INTENT · split pursuit', d:'Round-table attendees → 30-45d commercial. 1:1 attendees → 60d evaluation.', ch:'AE-owned', a:'Round-table notes, scorecards, SE1/SE2', terminal:true},
+      nu:{ t:'NURTURE · drip + TL re-entry', d:'TL hero re-circulation quarterly. Signal watch + hand-raise re-entry.', ch:'Email · LI', a:'Drip + TL1 quarterly refresh', terminal:true} },
+  ];
+
+  function renderJourneyRow(r) {
+    const rowHdClass = r.tlRow ? 'tr-row-hd tl-row' : 'tr-row-hd';
+    const hiTerm = r.hi.terminal ? 'background:linear-gradient(135deg,#D6EDD4,#B7E0B3);border-color:var(--green);' : '';
+    const nuTerm = r.nu.terminal ? 'background:linear-gradient(135deg,#FFF6D6,#F2E1A3);border-color:var(--amber);' : '';
+    return `
+      <div class="${rowHdClass}">${r.stage}</div>
+      <div class="tr-cell hi" style="${hiTerm}"><span class="t" style="${r.hi.terminal ? 'color:var(--green);' : ''}">${r.hi.t}</span>${r.hi.d}<div class="tr-channels">Channels: ${r.hi.ch}</div><div class="tr-assets">Assets: ${r.hi.a}</div></div>
+      <div class="tr-cell nu" style="${nuTerm}"><span class="t" style="${r.nu.terminal ? 'color:var(--amber);' : ''}">${r.nu.t}</span>${r.nu.d}<div class="tr-channels">Channels: ${r.nu.ch}</div><div class="tr-assets">Assets: ${r.nu.a}</div></div>
+    `;
+  }
+  document.getElementById('trGridLean').insertAdjacentHTML('beforeend', journeyLean.map(renderJourneyRow).join(''));
+  document.getElementById('trGridRich').insertAdjacentHTML('beforeend', journeyRich.map(renderJourneyRow).join(''));
+
+  // ---------- CHANNEL MIX PLAYS ----------
+  const ph = (label, sub='Finished preview placeholder') =>
+    `<div class="placeholder tall"><div class="ph-icon">◇</div><div class="ph-label">${label}</div><div class="ph-sub">${sub}</div></div>`;
+
+  const plays = {
+    tl: [
+      { title:'TL1 Hero — Analyst-validated research', stage:'TL · W1', asset:'TL1', trigger:'Pre-launch', audience:'CXOs at TAL', cta:'Download the report' },
+      { title:'TL2/TL3 — Exec LinkedIn articles', stage:'TL · W2-W3', asset:'TL2, TL3', trigger:'TL1 amplification', audience:'TAL execs + adjacency', cta:'Read on LinkedIn' },
+      { title:'TL4 — Short video / podcast', stage:'TL · W3-W4', asset:'TL4', trigger:'TL hero echo', audience:'TAL CXO + practitioners', cta:'Watch the clip' },
+      { title:'TL re-targeting nurture', stage:'TL → W5', asset:'All TL', trigger:'TL engagement', audience:'TL-engaged accounts', cta:'Outreach handoff' },
+    ],
+    email: [
+      { title:'T1 · Exec invite (CP → CXO)', stage:'TOFU', asset:'CL1 / TL1 (rich)', trigger:'List entry', audience:'CXO Tier-1', cta:'Book 20-min call' },
+      { title:'T2 · Webinar invite (AE → champion)', stage:'MOFU', asset:'WD2/WD3', trigger:'Engaged account', audience:'Practitioner champion', cta:'Register for webinar' },
+      { title:'T3 · Field bundle drop (MKT)', stage:'MOFU', asset:'CL3a-c, CL4-CL6', trigger:'Pre-event', audience:'Engaged TAL', cta:'Read success stories' },
+      { title:'T4 · Workshop confirm + prep', stage:'BOFU', asset:'WD4 / WD6 (rich)', trigger:'Workshop booked', audience:'Workshop attendees', cta:'Complete pre-work' },
+      { title:'T5 · Re-engagement drip', stage:'Nurture', asset:'CL3a-c, replay', trigger:'No-show', audience:'Non-attendees', cta:'Watch replay' },
+      { title:'T6 · Fast-path auto-ack', stage:'Any', asset:'System', trigger:'Hand-raise', audience:'Hand-raiser', cta:'SDR follow-up <= 4h' },
+    ],
+    liorg: [
+      { title:'Post 1 · Exec perspective', stage:'TOFU', asset:'CL1 / TL2', trigger:'Wk 2 (rich: W2)', audience:'Followers', cta:'Read on LP' },
+      { title:'Post 2 · Success story carousel', stage:'TOFU', asset:'CL3a-c', trigger:'Wk 3', audience:'Followers + reposts', cta:'See the wins' },
+      { title:'Post 3 · Company page · webinar invite', stage:'MOFU', asset:'WD2', trigger:'Recruit week', audience:'Followers + event', cta:'Register' },
+      { title:'Post 4 · Customer-voice snippet', stage:'MOFU proof', asset:'CL4 excerpt', trigger:'Post-webinar', audience:'Followers', cta:'Read the case' },
+      { title:'Post 5 · Exec poll', stage:'Re-engagement', asset:'SE5 framing', trigger:'Late campaign', audience:'Connections', cta:'Vote + DM' },
+    ],
+    lipaid: [
+      { title:'Ad 1 · Awareness sponsored content', stage:'TOFU', asset:'CL1 / TL1 hero (rich)', trigger:'Wk 2', audience:'Matched TAL', cta:'LP visit' },
+      { title:'Ad 2 · Webinar event ad', stage:'MOFU', asset:'WD2/WD3', trigger:'Recruit weeks', audience:'Practitioner titles', cta:'Register' },
+      { title:'Ad 3 · Success story message ad', stage:'MOFU', asset:'CL3a-c', trigger:'Pre/post-event', audience:'Engaged TAL', cta:'Read more' },
+      { title:'Ad 4 · Retargeting', stage:'Retarget', asset:'WD4 / WD6', trigger:'Rolling', audience:'LP visitors', cta:'Book workshop' },
+    ],
+    web: [
+      { title:'WD1 · Offering LP', stage:'All', asset:'CL1 + CL2 + WD1', trigger:'Top-of-funnel entry', audience:'TAL', cta:'Explore / Download' },
+      { title:'WD2/WD3 · Webinar pages', stage:'MOFU', asset:'WD2 outline + WD3 reg', trigger:'Recruit window', audience:'Practitioner audience', cta:'Save your seat' },
+      { title:'WD4/WD5 · 1:1 Workshop pages', stage:'BOFU', asset:'WD4 + WD5', trigger:'BOFU + fast-path', audience:'Qualified accounts', cta:'Book a workshop' },
+      { title:'TL hero gated LP (rich)', stage:'TL', asset:'TL1', trigger:'Wk 1+', audience:'CXOs / execs', cta:'Get the report' },
+      { title:'WD6/WD7 · Round Table pages (rich)', stage:'BOFU', asset:'WD6 + WD7', trigger:'Wk 9+', audience:'Top-5 priority execs', cta:'Confirm round-table seat' },
+    ],
+    webinar: [
+      { title:'Live session', stage:'S3 hinge', asset:'WD2/WD3', trigger:'Lean W4 / Rich W8', audience:'Lean: ~15 / Rich: 200+', cta:'Book workshop / round-table from Q&A' },
+      { title:'Evergreen + chapter clips', stage:'Post-event', asset:'Recording chapters', trigger:'+1 week', audience:'On-demand viewers', cta:'Download bundle / Book workshop' },
+      { title:'Post-event segmentation rules', stage:'S4 routing', asset:'Automation logic', trigger:'Same night', audience:'All registrants', cta:'Auto-route H/N' },
+    ],
+    workshop: [
+      { title:'Pre-work questionnaire', stage:'48h prior', asset:'WD4 pre-work', trigger:'Workshop booked', audience:'Attendees', cta:'Submit pre-work' },
+      { title:'Live facilitation · 90 min', stage:'BOFU delivery', asset:'WD4 facilitator script', trigger:'Workshop day', audience:'Customer team + SA + CP', cta:'Co-build scorecard' },
+      { title:'Output · 5-dim scorecard', stage:'Output', asset:'Scorecard template', trigger:'End of session', audience:'Customer exec', cta:'Review + schedule roadmap' },
+      { title:'Output · 90-day sprint plan', stage:'Output', asset:'Sprint template', trigger:'Within 48h post', audience:'Customer exec + CP', cta:'Approve next steps' },
+    ],
+    roundtable: [
+      { title:'Round Table invite · white-glove', stage:'BOFU', asset:'WD6/WD7 + TE3', trigger:'Wk 9-10', audience:'Top-5 priority execs', cta:'Confirm seat (5 only)' },
+      { title:'Pre-read · hero TL + benchmark', stage:'48h prior', asset:'TL1 + benchmark prep', trigger:'Confirmed seat', audience:'Confirmed execs', cta:'Review pre-read' },
+      { title:'Live round table · 90 min', stage:'BOFU delivery (W11)', asset:'WD6 facilitator script', trigger:'Round Table day', audience:'5 execs + facilitator + analyst', cta:'Peer benchmark + commitment' },
+      { title:'Same-day commercial follow-up', stage:'Output', asset:'AE/CP intro', trigger:'Within 24h', audience:'Round-table attendees', cta:'Schedule commercial discussion' },
+    ],
+    tele: [
+      { title:'TE1 · Webinar recruitment', stage:'TE1 weeks', asset:'WD3 + SE5', trigger:'Recruit window', audience:'Practitioner titles', cta:'Confirm seat' },
+      { title:'TE2 · 1:1 Workshop recruitment', stage:'TE2 weeks', asset:'WD4/WD5 + SE5', trigger:'Post-event', audience:'Engaged accts', cta:'Book workshop' },
+      { title:'TE3 · Round Table white-glove (rich)', stage:'Pre-W11', asset:'WD6 + TE3 script', trigger:'Top-5 selection', audience:'Top-5 priority execs', cta:'Confirm round-table seat' },
+    ],
+  };
+  function renderPlay(p) {
+    return `<div class="play-card">
+      <div class="pc-title">${p.title}</div>
+      <div class="pc-meta">
+        <span>Stage:</span><span><b>${p.stage}</b></span>
+        <span>Asset:</span><span><b>${p.asset}</b></span>
+        <span>Trigger:</span><span>${p.trigger}</span>
+        <span>Audience:</span><span>${p.audience}</span>
+        <span>CTA:</span><span><b>${p.cta}</b></span>
+      </div>
+      ${ph('Finished content preview', 'Creative drops in here')}
+    </div>`;
+  }
+  Object.keys(plays).forEach(k => {
+    const el = document.getElementById('ch-' + k + '-grid');
+    if (el) el.innerHTML = plays[k].map(renderPlay).join('');
+  });
+  document.querySelectorAll('#chtabs button').forEach(b => {
+    b.addEventListener('click', () => {
+      document.querySelectorAll('#chtabs button').forEach(x => x.classList.remove('active'));
+      b.classList.add('active');
+      const target = 'ch-' + b.dataset.ch;
+      document.querySelectorAll('.ch-panel').forEach(p => p.classList.toggle('active', p.id === target));
+    });
+  });
+
+  // ---------- FAST-PATH TRIGGERS ----------
+  const triggers = [
+    { t: 'Inbound contact-sales form', src: 'Website LP form', lane: 'b', slot: 'Lane B (1:1 Workshop)', owner: 'SDR → AE+SA' },
+    { t: 'Inbound RFI / RFP', src: 'Email / procurement', lane: 'b', slot: 'Lane B (Workshop or Proposal)', owner: 'AE+SA → CP' },
+    { t: 'AE-SA nominated account', src: 'Internal nomination', lane: 'b', slot: 'Lane B (1:1 Workshop)', owner: 'AE+SA' },
+    { t: 'Partner referral / analyst', src: 'Partner portal · analyst', lane: 'b', slot: 'Lane B (Workshop)', owner: 'Partner Mgr → AE+SA' },
+    { t: 'Exec LinkedIn reply / DM', src: 'Practice lead LI', lane: 'a', slot: 'Lane A (Webinar) or B', owner: 'SDR → CP' },
+    { t: 'Conference hand-off', src: 'On-site lead capture', lane: 'a', slot: 'Lane A (Webinar)', owner: 'SDR → AE' },
+    { t: 'Existing-account expansion ask', src: 'CSM / AE flag', lane: 'b', slot: 'Lane B (Workshop)', owner: 'CSM → AE+SA' },
+    { t: 'Webinar live-chat demo ask', src: 'Q&A / chat capture', lane: 'b', slot: 'Lane B (Workshop)', owner: 'SDR → AE+SA' },
+    { t: 'LP "Book Workshop" CTA click', src: 'Landing page button', lane: 'b', slot: 'Lane B (Workshop)', owner: 'SDR' },
+    { t: 'High-value retargeting click', src: 'Paid LI conv event', lane: 'a', slot: 'Lane A (Webinar)', owner: 'SDR' },
+    { t: 'Peer referral inside account', src: 'Attendee intro', lane: 'a', slot: 'Lane A (Webinar)', owner: 'AE' },
+    { t: 'Competitor loss re-engagement', src: 'Sales-surface flag', lane: 'b', slot: 'Lane B (Workshop)', owner: 'AE+CP' },
+    { t: 'TL hero downloaded by Tier-1 exec', src: 'TL1 gated LP', lane: 'c', slot: 'Lane C (Round Table)', owner: 'Practice Lead → AE', richOnly: true },
+    { t: 'Round-table interest expressed via LI', src: 'LI DM to practice lead', lane: 'c', slot: 'Lane C (Round Table)', owner: 'Practice Lead → AE', richOnly: true },
+    { t: 'Analyst-introduced exec', src: 'Analyst handoff', lane: 'c', slot: 'Lane C (Round Table)', owner: 'Practice Lead', richOnly: true },
+  ];
+  function renderTriggers() {
+    const v = document.body.dataset.variant;
+    const tgrid = document.getElementById('triggers');
+    tgrid.innerHTML = '';
+    triggers.forEach((tr) => {
+      if (tr.richOnly && v !== 'rich') return;
+      const el = document.createElement('div');
+      el.className = 'trigger-card';
+      el.innerHTML = `<div class="tr-t">${tr.t}</div><div class="tr-src">${tr.src}</div><div class="tr-lane ${tr.lane}">${tr.slot}</div>`;
+      el.addEventListener('click', () => {
+        document.querySelectorAll('.trigger-card').forEach(x => x.classList.remove('active'));
+        el.classList.add('active');
+        renderDetail(tr);
+      });
+      tgrid.appendChild(el);
+    });
+  }
+  function renderDetail(tr) {
+    const el = document.getElementById('triggerdetail');
+    const laneClass = tr.lane;
+    const laneName = { a:'WEBINAR LANE', b:'1:1 WORKSHOP LANE', c:'ROUND TABLE LANE' }[tr.lane];
+    const finalNode = { a:'Webinar attended', b:'Workshop delivered', c:'Round-table seat held' }[tr.lane];
+    el.innerHTML = `
+      <h3>${tr.t}</h3>
+      <div style="font-size:12px; color:var(--muted); margin-bottom:6px;">Source: <b>${tr.src}</b> · Owner: <b>${tr.owner}</b> · Slot: <b>${tr.slot}</b></div>
+      <div class="route-flow">
+        <span class="route-node">Hand-raise</span><span class="route-arr">→</span>
+        <span class="route-node">SDR Triage</span><span class="route-arr">→</span>
+        <span class="route-node ${laneClass}">${laneName}</span><span class="route-arr">→</span>
+        <span class="route-node ${laneClass}">${finalNode}</span><span class="route-arr">→</span>
+        <span class="route-node">Pipeline</span>
+      </div>
+      <div style="font-size:12px;">Re-enters reporting funnel with source tag <code>fast_path_${tr.lane.toUpperCase()}</code>.</div>
+    `;
+  }
+
+  // ---------- PREDICT (OUTCOME PREDICTION) ----------
   const sl = id => document.getElementById(id);
   const fmt = n => Math.round(n).toLocaleString();
   function refresh() {
+    const v = document.body.dataset.variant;
     const tal  = +sl('s-tal').value;
     const eng  = +sl('s-eng').value / 100;
     const reg  = +sl('s-reg').value / 100;
@@ -1047,7 +1320,7 @@
     const watt = +sl('s-watt').value / 100;
     const pur  = +sl('s-pur').value / 100;
     const val  = +sl('s-val').value;
- 
+
     sl('v-tal').textContent  = fmt(tal);
     sl('v-eng').textContent  = (eng*100).toFixed(0) + '%';
     sl('v-reg').textContent  = (reg*100).toFixed(0) + '%';
@@ -1056,26 +1329,66 @@
     sl('v-watt').textContent = (watt*100).toFixed(0) + '%';
     sl('v-pur').textContent  = (pur*100).toFixed(0) + '%';
     sl('v-val').textContent  = '$' + val + 'K';
- 
-    const engd  = Math.round(tal * eng);
-    const regs  = Math.round(engd * reg);
-    const atts  = Math.round(regs * att);
-    const wregs = Math.round(atts * wreg);
-    const watts = Math.round(wregs * watt);         // High-Intent
-    const nurt  = Math.max(wregs - watts, 0);       // Nurture (registered, no-show)
-    const pipCnt = Math.round(watts * pur);
-    const pipVal = pipCnt * val;
- 
-    const stages = [
-      { n: 'Target Accounts',           v: tal,  w: 100,                cls: '' },
-      { n: 'Engaged Accounts',          v: engd, w: (engd/tal)*100,     cls: '' },
-      { n: 'Webinar Registrations',     v: regs, w: (regs/tal)*100,     cls: '' },
-      { n: 'Webinar Attendance',        v: atts, w: (atts/tal)*100,     cls: '' },
-      { n: 'Workshop Registrations',    v: wregs,w: (wregs/tal)*100,    cls: '' },
-      { n: 'Workshop Attendance (HI)',  v: watts,w: (watts/tal)*100,    cls: 'hi' },
-      { n: 'Nurture (reg, no-show)',    v: nurt, w: (nurt/tal)*100,     cls: 'nu' },
-      { n: 'Qualified Pipeline',        v: pipCnt,w:(pipCnt/tal)*100,   cls: 'hi' },
-    ];
+
+    let stages = [];
+    let watts = 0, nurt = 0, pipCnt = 0, pipVal = 0;
+
+    if (v === 'lean') {
+      const engd  = Math.round(tal * eng);
+      const regs  = Math.round(engd * reg);
+      const atts  = Math.round(regs * att);
+      const wregs = Math.round(atts * wreg);
+      watts = Math.round(wregs * watt);
+      nurt  = Math.max(wregs - watts, 0);
+      pipCnt = Math.round(watts * pur);
+      pipVal = pipCnt * val;
+      stages = [
+        { n: 'Target Accounts',           v: tal,   w: 100,                cls: '' },
+        { n: 'Engaged Accounts',          v: engd,  w: (engd/tal)*100,     cls: '' },
+        { n: 'Webinar Registrations',     v: regs,  w: (regs/tal)*100,     cls: '' },
+        { n: 'Webinar Attendance',        v: atts,  w: (atts/tal)*100,     cls: '' },
+        { n: 'Workshop Registrations',    v: wregs, w: (wregs/tal)*100,    cls: '' },
+        { n: 'Workshop Attended (HI)',    v: watts, w: (watts/tal)*100,    cls: 'hi' },
+        { n: 'Nurture (reg, no-show)',    v: nurt,  w: (nurt/tal)*100,     cls: 'nu' },
+        { n: 'Qualified Pipeline',        v: pipCnt,w: (pipCnt/tal)*100,   cls: 'hi' },
+      ];
+    } else {
+      const tlift = +sl('s-tlift').value / 100;
+      const pra  = +sl('s-pra').value;
+      const rt   = +sl('s-rt').value;
+      sl('v-tlift').textContent = '+' + (tlift*100).toFixed(0) + '%';
+      sl('v-pra').textContent   = pra;
+      sl('v-rt').textContent    = rt;
+
+      const effEng = Math.min(eng + tlift, 0.95);
+      const engd   = Math.round(tal * effEng);
+      const pract  = engd * pra;
+      const regs   = Math.round(pract * reg);
+      const atts   = Math.round(regs * att);
+      // BOFU split: round table = rt seats (top-5 from priority list); 1:1 = % of remaining engaged accts
+      const remaining = Math.max(engd - rt, 0);
+      const wregs = Math.round(remaining * wreg);
+      const wattsOnly = Math.round(wregs * watt);
+      watts = rt + wattsOnly;                      // High-Intent total = round table + 1:1 attended
+      nurt  = Math.max(wregs - wattsOnly, 0);
+      pipCnt = Math.round(watts * pur);
+      pipVal = pipCnt * val;
+      const visMax = Math.max(tal, pract);
+      stages = [
+        { n: 'Target Accounts',                 v: tal,   w: (tal/visMax)*100,    cls: '' },
+        { n: 'Engaged Accounts (TL-lifted)',    v: engd,  w: (engd/visMax)*100,   cls: 'tl' },
+        { n: 'Practitioners Reached',           v: pract, w: (pract/visMax)*100,  cls: 'tl' },
+        { n: 'Webinar Registrations',           v: regs,  w: (regs/visMax)*100,   cls: '' },
+        { n: 'Webinar Attendance',              v: atts,  w: (atts/visMax)*100,   cls: '' },
+        { n: 'Round-Table Seats (HI)',          v: rt,    w: (rt/visMax)*100,     cls: 'rt' },
+        { n: '1:1 Workshop Registrations',      v: wregs, w: (wregs/visMax)*100,  cls: '' },
+        { n: '1:1 Workshop Attended (HI)',      v: wattsOnly, w: (wattsOnly/visMax)*100, cls: 'hi' },
+        { n: 'Nurture (reg, no-show)',          v: nurt,  w: (nurt/visMax)*100,   cls: 'nu' },
+        { n: 'Total High-Intent (RT + 1:1)',    v: watts, w: (watts/visMax)*100,  cls: 'hi' },
+        { n: 'Qualified Pipeline',              v: pipCnt,w: (pipCnt/visMax)*100, cls: 'hi' },
+      ];
+    }
+
     const fnl = document.getElementById('pred-funnel');
     fnl.innerHTML = '';
     stages.forEach(s => {
@@ -1083,11 +1396,11 @@
       row.className = 'pred-stage';
       row.innerHTML = `<div class="nm">${s.n}</div>
         <div class="pred-bar ${s.cls}"><div class="bf" style="width:${Math.max(s.w, 2)}%;"></div></div>
-        <div class="pv">${s.v}</div>`;
+        <div class="pv">${fmt(s.v)}</div>`;
       fnl.appendChild(row);
     });
- 
-    sl('sum-ws').textContent = watts;         // workshops delivered (attended = High-Intent population)
+
+    sl('sum-ws').textContent = watts;
     sl('sum-hi').textContent = watts;
     sl('sum-nu').textContent = nurt;
     const valFmt = pipVal >= 1000
@@ -1095,12 +1408,17 @@
       : '$' + pipVal + 'K';
     sl('sum-val').textContent = valFmt;
   }
-  ['s-tal','s-eng','s-reg','s-att','s-wreg','s-watt','s-pur','s-val'].forEach(id => {
-    sl(id).addEventListener('input', refresh);
+  ['s-tal','s-eng','s-reg','s-att','s-wreg','s-watt','s-pur','s-val','s-tlift','s-pra','s-rt'].forEach(id => {
+    const el = sl(id);
+    if (el) el.addEventListener('input', refresh);
   });
-  refresh();
+
+  // Initial render
+  setVariant('lean');
+  renderTriggers();
+  // Re-render triggers when variant changes
+  variantBtns.forEach(b => b.addEventListener('click', renderTriggers));
 </script>
- 
+
 </body>
 </html>
- 
